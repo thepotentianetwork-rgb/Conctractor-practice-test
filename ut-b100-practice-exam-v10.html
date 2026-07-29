@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UT B100 Business &amp; Law — Practice Exam</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root{
+    --blue-950:#0a1f33;
+    --blue-900:#0e2a44;
+    --blue-800:#123657;
+    --line:#4f90c4;
+    --line-soft:#2e5478;
+    --amber:#e0a548;
+    --brick:#c1543a;
+    --green:#5f9e6e;
+    --ink:#eaf1f7;
+    --ink-dim:#a9bdd0;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--blue-950);
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size:28px 28px;
+    background-position:-1px -1px;
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    padding:0 0 60px 0;
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:24px 18px;}
+
+  header.top{border-bottom:2px solid var(--line);padding-bottom:16px;margin-bottom:22px;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+  h1{font-family:'Fraunces',serif;font-weight:700;font-size:28px;line-height:1.15;margin:0 0 8px 0;}
+  .sub{color:var(--ink-dim);font-size:14px;line-height:1.5;}
+  .blueprint-badge{display:inline-block;border:1.5px solid var(--line);border-radius:2px;padding:2px 8px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--line);margin-right:6px;margin-top:10px;}
+  .blueprint-badge.weak{border-color:var(--brick);color:var(--brick);}
+
+  .panel{background:var(--blue-900);border:1px solid var(--line-soft);border-radius:4px;padding:18px;margin-bottom:16px;}
+  .breakdown-row{display:flex;align-items:center;gap:10px;font-size:12.5px;margin-bottom:9px;}
+  .breakdown-label{font-family:'IBM Plex Mono',monospace;width:150px;flex-shrink:0;color:var(--ink-dim);}
+  .breakdown-label.weak{color:var(--brick);font-weight:600;}
+  .bar-track{flex:1;height:8px;background:var(--blue-800);border-radius:4px;overflow:hidden;}
+  .bar-fill{height:100%;background:var(--line);}
+  .bar-fill.weak{background:var(--brick);}
+  .breakdown-pct{font-family:'IBM Plex Mono',monospace;width:52px;text-align:right;color:var(--ink);flex-shrink:0;}
+
+  button.primary{background:var(--amber);color:var(--blue-950);border:none;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:14px;letter-spacing:0.03em;padding:14px 20px;border-radius:3px;width:100%;cursor:pointer;margin-top:8px;}
+  button.primary:active{transform:translateY(1px);}
+  button.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line);font-family:'IBM Plex Mono',monospace;font-size:13px;padding:10px 16px;border-radius:3px;cursor:pointer;width:100%;margin-top:10px;}
+  button.secondary{background:var(--blue-800);color:var(--amber);border:1.5px solid var(--amber);font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:13px;padding:12px 16px;border-radius:3px;width:100%;cursor:pointer;margin-top:10px;}
+
+  .progress-row{display:flex;justify-content:space-between;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-dim);margin-bottom:10px;}
+  .progress-track{height:5px;background:var(--blue-800);border-radius:3px;overflow:hidden;margin-bottom:20px;}
+  .progress-fill{height:100%;background:var(--amber);transition:width .25s ease;}
+
+  .topic-tag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--blue-950);background:var(--line);padding:3px 8px;border-radius:2px;margin-bottom:12px;}
+  .topic-tag.weak{background:var(--brick);}
+
+  .question-card{background:var(--blue-900);border:1px solid var(--line-soft);border-radius:4px;padding:20px 18px 18px 18px;}
+  .q-text{font-family:'Fraunces',serif;font-weight:500;font-size:19px;line-height:1.35;margin:0 0 16px 0;}
+  .opt{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;background:var(--blue-800);border:1.5px solid transparent;color:var(--ink);font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.4;padding:12px 12px;border-radius:3px;margin-bottom:9px;cursor:pointer;}
+  .opt .letter{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--line);flex-shrink:0;}
+  .opt.correct{border-color:var(--green);background:rgba(95,158,110,0.18);}
+  .opt.correct .letter{color:var(--green);}
+  .opt.incorrect{border-color:var(--brick);background:rgba(193,84,58,0.18);}
+  .opt.incorrect .letter{color:var(--brick);}
+  .opt:disabled{cursor:default;}
+
+  .explain{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line-soft);font-size:13.5px;line-height:1.55;color:var(--ink-dim);}
+  .explain b{color:var(--ink);}
+
+  .nav-row{display:flex;gap:10px;margin-top:16px;}
+
+  .score-hero{text-align:center;padding:26px 0 10px 0;}
+  .score-num{font-family:'Fraunces',serif;font-weight:700;font-size:64px;line-height:1;}
+  .score-num.pass{color:var(--green);}
+  .score-num.fail{color:var(--brick);}
+  .score-label{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-dim);margin-top:6px;}
+
+  .topic-result-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;padding:9px 0;border-bottom:1px solid var(--blue-800);}
+  .topic-result-row:last-child{border-bottom:none;}
+  .topic-score{font-family:'IBM Plex Mono',monospace;color:var(--ink-dim);}
+  .topic-result-row.weak span:first-child{color:var(--brick);font-weight:600;}
+
+  footer{text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--line-soft);margin-top:26px;}
+  .mode-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px;}
+  .mode-btn{flex:1 1 calc(50% - 4px);background:var(--blue-800);border:1.5px solid var(--line-soft);color:var(--ink-dim);font-family:'IBM Plex Mono',monospace;font-size:12px;padding:10px 8px;border-radius:3px;cursor:pointer;text-align:center;}
+  .mode-btn.active{border-color:var(--amber);color:var(--amber);}
+
+  .history-row{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;padding:8px 0;border-bottom:1px solid var(--blue-800);font-family:'IBM Plex Mono',monospace;}
+  .history-row:last-child{border-bottom:none;}
+  .history-score{font-weight:600;}
+  .history-score.pass{color:var(--green);}
+  .history-score.fail{color:var(--brick);}
+  .history-meta{color:var(--ink-dim);}
+  .empty-note{color:var(--ink-dim);font-size:13px;font-style:italic;}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+
+<script>
+// Fernando's actual 03/20/2026 Prov score report — used to flag weak subject areas
+const LAST_SCORE = {
+  "Business Organization": {correct:1, total:4},
+  "Contract Management": {correct:1, total:6},
+  "Estimating and Bidding": {correct:4, total:6},
+  "Financial Management": {correct:4, total:6},
+  "Labor Laws": {correct:3, total:6},
+  "Licensing": {correct:5, total:10},
+  "Lien Laws": {correct:1, total:3},
+  "Project Management": {correct:5, total:5},
+  "Risk Management": {correct:3, total:5},
+  "Safety": {correct:0, total:4},
+  "Tax Laws": {correct:2, total:5}
+};
+const WEAK_THRESHOLD = 0.5;
+function isWeak(topic){
+  const s = LAST_SCORE[topic];
+  if(!s) return false;
+  return (s.correct/s.total) < WEAK_THRESHOLD;
+}
+
+// Expanded question bank — each topic has more questions than any single quiz uses,
+// so "shuffle a new set" pulls a genuinely different mix each time.
+const QUESTIONS = [
+  // BUSINESS ORGANIZATION (9) — weak
+  {topic:"Business Organization", q:"What is the main advantage of forming an LLC over a sole proprietorship for a contracting business?", opts:["It eliminates the need for a license","It generally shields personal assets from business debts and liabilities","It removes the need for insurance","It exempts the business from taxes entirely"], correct:1, explain:"An LLC creates a legal separation between the business and the owner's personal assets, limiting personal liability for business debts."},
+  {topic:"Business Organization", q:"In a sole proprietorship, who is personally liable for business debts and lawsuits?", opts:["No one — the business is a separate entity","The owner, personally and without limit","Only the bank that financed the business","The State of Utah"], correct:1, explain:"A sole proprietorship has no legal separation from its owner, so the owner bears unlimited personal liability."},
+  {topic:"Business Organization", q:"What is a 'qualifying party' (or qualifier) in the context of a Utah contracting license?", opts:["The customer who hires the contractor","The individual whose experience and exam results qualify the business entity for licensure","The bank that approves a construction loan","The building inspector assigned to a project"], correct:1, explain:"The qualifier is the individual (owner, officer, or employee) whose experience and passed exam allow the business entity to hold a license."},
+  {topic:"Business Organization", q:"A general partnership means that each partner is typically:", opts:["Only liable up to their invested capital","Personally liable for the partnership's debts, including a partner's actions","Protected from all business liability","Taxed separately from the partnership's income"], correct:1, explain:"In a general partnership, partners share personal liability for business obligations, including debts created by other partners acting within the business."},
+  {topic:"Business Organization", q:"What does 'DBA' (doing business as) allow a company to do?", opts:["Avoid needing a contractor license","Operate and advertise under a name other than its legal registered name","Skip filing taxes","Bypass workers' compensation requirements"], correct:1, explain:"A DBA (assumed/fictitious business name filing) lets a business legally operate under a trade name different from its registered legal name."},
+  {topic:"Business Organization", q:"Which business structure creates the clearest separation between the business entity and its owners, with shares and a board?", opts:["Sole proprietorship","General partnership","Corporation","Informal joint venture"], correct:2, explain:"A corporation is a distinct legal entity from its owners (shareholders), with its own liability shield, governed by officers/directors."},
+  {topic:"Business Organization", q:"An S-corporation election primarily affects a business's:", opts:["Ability to hold a contractor license","Tax treatment, passing income/loss through to shareholders' personal returns","Insurance requirements","Bonding requirements"], correct:1, explain:"An S-corp is a tax election allowing income and losses to pass through to shareholders, avoiding corporate-level double taxation."},
+  {topic:"Business Organization", q:"A registered agent for a Utah LLC or corporation is primarily responsible for:", opts:["Managing daily job site operations","Receiving legal and official state correspondence on behalf of the business","Signing every customer contract","Filing the company's sales tax returns"], correct:1, explain:"A registered agent is the designated point of contact for legal notices and state filings sent to the business."},
+  {topic:"Business Organization", q:"In a joint venture between two contracting companies for a single large project, each party typically:", opts:["Has no liability tied to the venture","Shares in the profits, losses, and liability of that specific project per their agreement","Automatically merges into one company permanently","Is exempt from needing their own license"], correct:1, explain:"A joint venture is a temporary partnership for a specific project, with liability and profit/loss shared per the venture agreement."},
+  {topic:"Business Organization", q:"An LLC owner personally guarantees a business loan for equipment. If the LLC later defaults, the owner's personal assets are:", opts:["Fully protected, since the LLC shields all personal liability no matter what","Exposed for that specific guaranteed debt, despite the LLC's general liability protection","Protected only if the owner is also the qualifier","Automatically forgiven under LLC law"], correct:1, explain:"A personal guarantee creates individual liability for that specific debt, overriding the LLC's protection for that obligation regardless of the entity structure.", commonlyMissed:true},
+  {topic:"Business Organization", q:"'Piercing the corporate veil' is a legal doctrine that allows a court to:", opts:["Dissolve a corporation for late tax filings only","Hold owners personally liable despite a corporate/LLC structure, typically due to fraud or ignoring corporate formalities","Automatically transfer ownership to creditors","Require a company to change its business name"], correct:1, explain:"Courts can disregard the liability shield and reach owners' personal assets when formalities are ignored or the entity is used to commit fraud or injustice.", commonlyMissed:true},
+  {topic:"Business Organization", q:"By default, a single-member LLC that hasn't elected corporate tax treatment is taxed by the IRS as:", opts:["A C-corporation","A disregarded entity, with income reported on the owner's personal return","Automatically tax-exempt","A general partnership"], correct:1, explain:"A single-member LLC is a 'disregarded entity' by default — its income/loss flows directly to the owner's personal tax return unless an election is made otherwise.", commonlyMissed:true},
+  {topic:"Business Organization", q:"A 'manager-managed' LLC, as opposed to a 'member-managed' LLC, means:", opts:["Only outside employees can ever be hired","Day-to-day decisions are delegated to designated managers rather than all members directly","The LLC cannot hold a contractor license","Members lose their liability protection"], correct:1, explain:"Manager-managed LLCs designate specific managers (who may or may not be members) to run daily operations, rather than requiring all members to be involved."},
+  {topic:"Business Organization", q:"If a sole proprietor who is the license qualifier passes away or becomes incapacitated, the business generally:", opts:["Continues operating under the license automatically forever","Loses its qualifying basis and must address the licensure gap, since the license was tied to that individual","Is transferred by default to the deceased's spouse regardless of experience","Is unaffected since sole proprietorships don't need qualifiers"], correct:1, explain:"Because licensure is tied to the qualifying individual's experience and exam, losing that person creates a real licensure gap the business must resolve."},
+  {topic:"Business Organization", q:"A general partnership can be formed and become legally binding:", opts:["Only with a formal written and notarized agreement","Through the conduct and conduct-based agreement of the parties, even without a written contract","Only after filing Articles of Partnership with DOPL","Only if a lawyer drafts the agreement"], correct:1, explain:"General partnerships can arise from conduct alone under partnership law, without any written agreement — though a written agreement is still strongly advisable."},
+  {topic:"Business Organization", q:"Compared to an LLC, a corporation generally requires more ongoing formalities such as:", opts:["No formalities are required for either structure","Regular board/shareholder meetings, minutes, and stricter recordkeeping to preserve the liability shield","Annual re-licensing with DOPL specifically for corporations only","Mandatory public stock offerings"], correct:1, explain:"Corporations typically must maintain more rigorous formalities — meetings, minutes, resolutions — than LLCs to preserve the liability protection of the entity."},
+
+  {topic:"Business Organization", q:"An LLC elects to be taxed as an S-corporation instead of its default disregarded-entity/partnership tax treatment. This election primarily changes:", opts:["The LLC's liability protection for its owners, making it stronger","How income can be split between salary and distributions to potentially reduce self-employment tax — not the underlying liability protection, which stays the same", "Whether the LLC needs a contractor license at all","Whether the LLC can have more than one owner"], correct:1, explain:"An S-corp tax election is purely a tax-treatment choice, primarily affecting self-employment tax exposure via salary/distribution splits — it does not change or enhance the LLC's liability shield, which comes from the entity type itself, not the tax election.", commonlyMissed:true},
+  {topic:"Business Organization", q:"A limited liability partnership (LLP) most specifically protects an individual partner from personal liability for:", opts:["All debts and obligations of the partnership under any circumstance","The malpractice, negligence, or misconduct of the OTHER partners — not necessarily their own actions or general partnership debts they personally guaranteed","Their own negligent work","Criminal liability for any partner's actions"], correct:1, explain:"LLP status is narrower than many assume — it typically shields a partner from liability caused by co-partners' negligence or misconduct, but doesn't necessarily eliminate liability for the partner's own actions or personally guaranteed debts.", commonlyMissed:true},
+  {topic:"Business Organization", q:"A single-member LLC's default classification as a 'disregarded entity' for FEDERAL tax purposes means:", opts:["The entity doesn't exist for any legal purpose, including liability","Its income/loss is reported on the owner's personal federal return, but this classification doesn't by itself affect the LLC's separate legal existence, its liability shield, or state-level tax treatment","It automatically loses its liability protection","It cannot hold a Utah contractor license"], correct:1, explain:"'Disregarded' is a federal INCOME TAX reporting concept only — the LLC still exists as a separate legal entity for liability and state-law purposes; conflating tax disregard with loss of liability protection is a common and costly misunderstanding."},
+
+  // CONTRACT MANAGEMENT (11) — weak
+  {topic:"Contract Management", q:"What three elements must generally be present for a construction contract to be enforceable?", opts:["Notarization, witnesses, and a state seal","Offer, acceptance, and consideration","A permit number, a bond, and insurance proof","A handshake, a deposit, and a start date"], correct:1, explain:"Like any contract, a construction contract needs an offer, acceptance of that offer, and consideration (something of value exchanged) to be legally binding."},
+  {topic:"Contract Management", q:"A homeowner asks for added scope mid-project that wasn't in the original agreement. What should happen before the work proceeds?", opts:["Just complete the work and mention it on the final invoice","A written, signed change order documenting scope, cost, and schedule impact","A verbal agreement is sufficient and standard practice","The contractor should refuse any changes once signed"], correct:1, explain:"Written change orders, signed by both parties before work begins, protect against payment disputes and scope creep."},
+  {topic:"Contract Management", q:"What is 'retainage' in a construction contract?", opts:["A late fee charged to the owner","A percentage of each payment withheld until satisfactory completion","A state tax on construction contracts","An insurance deductible"], correct:1, explain:"Retainage is a portion (commonly 5–10%) of each progress payment withheld until the work is completed and accepted."},
+  {topic:"Contract Management", q:"What does a force majeure clause protect a contractor against?", opts:["Poor workmanship claims","Delay caused by extraordinary events outside either party's control, like severe weather or natural disaster","Late payment from the owner","Subcontractor default"], correct:1, explain:"Force majeure clauses excuse performance delays caused by extraordinary events beyond the parties' control."},
+  {topic:"Contract Management", q:"In a cost-plus contract, the contractor is paid:", opts:["A fixed lump sum regardless of actual costs incurred","Actual documented costs of labor and materials, plus an agreed fee or percentage","Only for materials, with labor unpaid","A flat hourly rate with no cost documentation"], correct:1, explain:"Cost-plus contracts reimburse actual project costs and add a contractor fee, shifting more cost risk to the owner than fixed-price contracts."},
+  {topic:"Contract Management", q:"An indemnification clause in a contract primarily does what?", opts:["Sets the payment schedule","Shifts liability for specified claims or losses from one party to another","Defines the warranty period on materials","Sets the project's completion date"], correct:1, explain:"Indemnification clauses allocate responsibility for specified losses, claims, or damages between the contracting parties."},
+  {topic:"Contract Management", q:"A liquidated damages clause is used to:", opts:["Guarantee the contractor a bonus for finishing early","Pre-set a dollar penalty for late completion, agreed to in advance by both parties","Waive all contractor liability for defects","Automatically approve every change order"], correct:1, explain:"Liquidated damages establish a pre-agreed daily or flat penalty for missing the completion date, avoiding the need to prove actual damages later."},
+  {topic:"Contract Management", q:"Best practice when a customer wants work to start before a written contract is finalized is to:", opts:["Start work anyway and formalize the contract later","Decline to begin substantial work until scope and terms are documented and signed","Rely on a verbal 'yes' recorded during a phone call","Have a friend witness a handshake agreement instead"], correct:1, explain:"Starting substantial work without a signed contract creates real legal and payment risk — get scope and terms documented first."},
+  {topic:"Contract Management", q:"A 'time is of the essence' clause in a construction contract signals that:", opts:["Deadlines are casual suggestions","Meeting the stated deadlines is a material contract term, and missing them can be a breach","The contract has no fixed end date","Only the owner's deadlines matter, not the contractor's"], correct:1, explain:"This clause elevates scheduled dates to material terms — missing them can constitute a breach of contract, not just a minor delay."},
+  {topic:"Contract Management", q:"A warranty clause in a construction contract typically specifies:", opts:["The contractor's personal cell phone number","The period and scope during which the contractor will remedy defects in workmanship or materials","The homeowner's mortgage terms","The subcontractor's hourly rate"], correct:1, explain:"Warranty clauses define how long and to what extent the contractor is responsible for correcting defective work after completion."},
+  {topic:"Contract Management", q:"If a contract is silent on a specific issue that later becomes a dispute, courts often look to:", opts:["Whichever party shouts loudest","Industry custom, prior dealings between the parties, and general contract law principles","Always ruling in favor of the contractor","Voiding the entire contract automatically"], correct:1, explain:"Courts often fill contractual gaps using industry custom, the parties' prior course of dealing, and general legal principles."},
+  {topic:"Contract Management", q:"An owner directs a contractor to proceed with extra work but refuses to sign a change order, saying 'we'll sort it out later.' The contractor's safest move is to:", opts:["Proceed with no documentation, trusting the owner's word","Document the verbal direction in writing (e.g., email confirmation) and still pursue a signed change order before continuing", "Refuse to do any more work on the project at all","Simply add the cost silently to the final bill with no notice"], correct:1, explain:"Written confirmation of verbal direction protects the contractor even if a formal change order isn't signed immediately, while still pushing for proper documentation."},
+  {topic:"Contract Management", q:"A 'pay-if-paid' clause in a subcontract differs from a 'pay-when-paid' clause in that pay-if-paid:", opts:["Both mean the same thing legally in every state","Can shift the risk of owner non-payment entirely onto the subcontractor, contingent on the GC actually being paid","Guarantees the subcontractor is always paid on time","Only applies to change orders"], correct:1, explain:"A pay-if-paid clause makes owner payment to the GC a true condition precedent to paying the sub, shifting non-payment risk downstream — treated differently by courts than a pay-when-paid timing clause.", commonlyMissed:true},
+  {topic:"Contract Management", q:"A contract includes both a liquidated damages clause AND allows the owner to also sue for actual/consequential damages from the same delay. This is generally considered:", opts:["Always fully enforceable with no issue","Potentially unenforceable as an improper penalty, since liquidated damages are meant to replace, not add to, proof of actual damages","Required under Utah law","Only a concern for public projects"], correct:1, explain:"Courts often view liquidated damages as the exclusive remedy for the delay they cover; stacking actual damages on top can render the clause an unenforceable penalty.", commonlyMissed:true},
+  {topic:"Contract Management", q:"A 'no-damages-for-delay' clause in a contract generally means:", opts:["The contractor can never be delayed","The contractor's remedy for an owner-caused delay is limited to a time extension only, not monetary damages","The owner waives all rights to enforce the schedule","The clause has no legal effect anywhere"], correct:1, explain:"This clause limits the contractor's remedy for delay to additional time rather than money, even when the delay is caused by the owner — though some jurisdictions carve out exceptions for bad faith.", commonlyMissed:true},
+  {topic:"Contract Management", q:"A contractor completes 90% of a project on a lump-sum contract, then the owner terminates for convenience. Absent other contract terms, the contractor is generally entitled to:", opts:["Nothing at all, since the job wasn't finished","Payment for work properly completed and costs reasonably incurred up to termination, per the termination clause","The full original contract price regardless of completion","Only reimbursement for materials, never labor"], correct:1, explain:"Termination-for-convenience clauses typically entitle the contractor to payment for completed work and reasonably incurred costs, not the full remaining contract value."},
+  {topic:"Contract Management", q:"A 'flow-down' (or 'flow-through') clause in a subcontract is used to:", opts:["Waive the subcontractor's right to payment","Bind the subcontractor to the same relevant terms and obligations the GC owes the owner in the prime contract","Guarantee the subcontractor extra profit","Eliminate the need for a written subcontract"], correct:1, explain:"Flow-down clauses pass applicable prime contract obligations (schedule, quality, dispute procedures) down to the subcontractor, keeping obligations consistent through the contract chain.", commonlyMissed:true},
+  {topic:"Contract Management", q:"Two clauses conflict: the general conditions say disputes go to arbitration, but a later-signed addendum says disputes go to court. Under standard contract interpretation, which typically controls?", opts:["The general conditions always control, regardless of when other documents were signed","Generally, the more specific and/or later-executed document controls over the earlier general terms","Neither clause is valid, so no dispute resolution process exists","Only a judge assigned before signing can decide"], correct:1, explain:"Standard interpretation principles generally favor specific and later-in-time provisions over earlier general ones when contract documents conflict.", commonlyMissed:true},
+
+  {topic:"Contract Management", q:"'Substantial completion' differs from 'final completion' in that substantial completion generally:", opts:["Means the contractor has been fully paid","Marks when the owner can use/occupy the project for its intended purpose, even though minor punch list items remain — triggering warranty periods and possibly retainage release timing, distinct from final completion when all punch items are done","Is a synonym for final completion with no practical difference","Only applies to public projects, never private ones"], correct:1, explain:"Substantial completion is a specific milestone (usable for intended purpose) that starts warranty clocks and often partial retainage release, while final completion requires all remaining punch list items to be finished — conflating the two is a common costly mistake.", commonlyMissed:true},
+  {topic:"Contract Management", q:"A contract requires written notice of any claim within 10 days of the event giving rise to it, or the claim is waived. A contractor discovers a differing site condition and submits written notice on day 12. Under a strictly enforced notice clause, the claim is most likely:", opts:["Still valid, since 2 days over is a minor technicality","Waived, since strict contractual notice deadlines are generally enforced regardless of how promptly the contractor otherwise acted once discovering the issue","Automatically valid because differing site conditions are always exempt from notice deadlines","Only valid if the owner agrees to accept it"], correct:1, explain:"Courts often strictly enforce contractual notice-of-claim deadlines as written; missing the deadline — even by a couple of days, even with a legitimate underlying claim — can waive the claim entirely absent a specific contract exception.", commonlyMissed:true},
+  {topic:"Contract Management", q:"An integration (merger) clause in a signed contract most specifically means:", opts:["The contract merges two companies into one entity","The written contract represents the entire and final agreement between the parties, superseding prior verbal or written negotiations on the same subject — not just a formality with no legal effect","The contract automatically renews each year","Change orders are no longer allowed after signing"], correct:1, explain:"An integration/merger clause has real legal weight — it bars a party from later claiming a prior verbal promise or earlier draft term still applies, since the final written contract is treated as the complete agreement.", commonlyMissed:true},
+  {topic:"Contract Management", q:"A 'differing site conditions' clause and a 'no-damages-for-delay' clause appear in the same contract. If an unforeseen differing site condition causes a delay, which clause's protection for the contractor typically controls, absent clearer contract language?", opts:["No-damages-for-delay always overrides everything else automatically","This depends on the specific contract language — differing site conditions clauses are often carved out as an exception to broad no-damages-for-delay provisions, but only if the contract actually says so", "Neither clause has any legal effect if both exist","The contractor automatically loses in this scenario"], correct:1, explain:"These clauses can genuinely conflict; whether a differing site conditions claim escapes a no-damages-for-delay bar depends entirely on the specific carve-out language in that contract — there's no universal default, which is exactly why this trips people up.", commonlyMissed:true},
+
+  // ESTIMATING AND BIDDING (8)
+  {topic:"Estimating and Bidding", q:"A material and labor 'takeoff' refers to:", opts:["Removing old materials from a site","Quantifying materials and labor needed from the plans to build an estimate","The final walkthrough with the owner","A tax deduction for tools"], correct:1, explain:"A takeoff is the process of measuring plans/specs to quantify materials, labor, and other costs used to build an estimate."},
+  {topic:"Estimating and Bidding", q:"What does a contractor's overhead and profit markup applied to a bid typically cover?", opts:["Only the cost of raw materials","Business operating costs (overhead) plus the contractor's profit margin, on top of direct job costs","Government permit fees exclusively","The homeowner's mortgage interest"], correct:1, explain:"Overhead and profit (O&P) is added on top of direct costs to cover business operating expenses and generate a profit."},
+  {topic:"Estimating and Bidding", q:"What is a bid bond intended to guarantee?", opts:["That the contractor will finish the job on time","That if awarded the job, the bidder will sign the contract and provide required bonds, or forfeit the bond amount","That the lowest bidder automatically wins the job","That materials will be delivered on schedule"], correct:1, explain:"A bid bond assures the project owner that a winning bidder will honor their bid and proceed with the contract, or the surety covers the difference."},
+  {topic:"Estimating and Bidding", q:"Why include a contingency line item in a project estimate?", opts:["To inflate the bid to guarantee the highest price wins","To budget for unforeseen costs or conditions discovered during construction","Because it's required by DOPL on every bid","To cover the owner's future maintenance costs"], correct:1, explain:"A contingency reserves budget for unforeseen conditions or costs that surface once work begins, reducing the risk of a loss on the job."},
+  {topic:"Estimating and Bidding", q:"When comparing competitive bids, an unusually low bid compared to others often signals:", opts:["The bidder is the most efficient and should always be selected","A possible scope gap, underestimation, or intent to make up costs through change orders","That the project will finish early","Nothing of concern"], correct:1, explain:"A bid far below others can indicate missing scope, poor estimating, or a strategy to recover profit later through change orders — worth a closer look before awarding."},
+  {topic:"Estimating and Bidding", q:"Unit pricing in a bid (e.g., cost per square foot or per linear foot) is most useful for:", opts:["Hiding the true total cost from the owner","Pricing quantities that may change during construction and adjusting the contract value accordingly","Avoiding the need for a written contract","Calculating payroll taxes"], correct:1, explain:"Unit pricing lets both parties adjust final contract value fairly when actual quantities differ from the original estimate."},
+  {topic:"Estimating and Bidding", q:"A pre-bid site visit is valuable primarily because it helps a contractor:", opts:["Meet the neighbors","Identify site conditions, access issues, and scope details that affect the estimate's accuracy","Skip reading the plans","Guarantee winning the bid"], correct:1, explain:"Site visits surface real conditions — access, terrain, existing utilities — that plans alone may not fully capture, improving estimate accuracy."},
+  {topic:"Estimating and Bidding", q:"An allowance in a bid or contract (e.g., '$5,000 allowance for flooring') is used when:", opts:["The final material selection hasn't been made yet, so a placeholder budget is set","The contractor wants to avoid liability entirely","The item is guaranteed to cost exactly that amount","No work will actually be done in that category"], correct:0, explain:"Allowances set a placeholder budget for items the owner hasn't finalized yet, to be adjusted once the actual selection and cost are known."},
+  {topic:"Estimating and Bidding", q:"A job has direct costs of $80,000. The contractor applies 10% overhead and then 10% profit, each calculated on the running subtotal. What is the approximate total bid price?", opts:["$96,000","$96,800","$100,000","$88,000"], correct:1, explain:"$80,000 + 10% overhead ($8,000) = $88,000; then + 10% profit on that subtotal ($8,800) = $96,800 total bid.", commonlyMissed:true},
+  {topic:"Estimating and Bidding", q:"A contractor's estimate assumes 4 workers for 10 days at 8 hours/day, but the actual crew size needed is 5 workers for the same duration. What best describes the estimating error?", opts:["A pricing error, not a quantity error","An underestimation of labor quantity (man-hours), which will compress margins if not corrected before bidding","No error — 4 or 5 workers doesn't matter for total labor hours","A materials takeoff error"], correct:1, explain:"Underestimating the number of workers needed understates total labor hours and cost, a quantity (not pricing) estimating error that erodes profit if uncorrected."},
+  {topic:"Estimating and Bidding", q:"Two bids come in for the same scope: Bid A is a lump sum of $150,000; Bid B is $140,000 plus unit prices for site conditions that 'may' add up to $20,000. From a risk standpoint, the owner should recognize that:", opts:["Bid B is definitely cheaper overall","Bid A offers more cost certainty, while Bid B carries potential upside/downside risk tied to actual field conditions","Lump sum bids are always illegal","Unit price bids can never exceed the stated cap"], correct:1, explain:"Lump sum pricing transfers quantity risk to the contractor and gives the owner price certainty, while unit-price/allowance structures leave final cost dependent on actual conditions."},
+  {topic:"Estimating and Bidding", q:"During bid leveling (comparing multiple contractor bids on the same project), the most important step before comparing prices is to:", opts:["Simply rank bids from lowest to highest price","Confirm each bid includes the same scope, exclusions, and assumptions so the comparison is apples-to-apples","Automatically disqualify the highest bid","Average all the bids together"], correct:1, explain:"Bid leveling requires normalizing scope, exclusions, and assumptions across bids first — otherwise a 'low' bid may simply be missing scope, not actually cheaper."},
+  {topic:"Estimating and Bidding", q:"A contractor discovers a takeoff error the day before a bid is due that would raise their price by 8%. The most defensible course of action is to:", opts:["Submit the original bid anyway to avoid looking disorganized","Correct the error and submit the accurate, adjusted bid, even if it changes their competitive position","Submit the low bid and plan to recover the difference through change orders later","Withdraw entirely rather than fix the number"], correct:1, explain:"Submitting a known-inaccurate bid to appear competitive, intending to recover cost later through change orders, is a red flag for bad-faith bidding practice — correcting and submitting an accurate number is the defensible path."},
+  {topic:"Estimating and Bidding", q:"A general contractor receives a bid bond requirement of 5% of the bid amount on a project. What is this bond amount if the bid is $400,000?", opts:["$4,000","$20,000","$40,000","$2,000"], correct:1, explain:"5% of $400,000 is $20,000 — the bid bond amount tied to that bid."},
+  {topic:"Estimating and Bidding", q:"Escalation clauses tied to material price volatility (e.g., lumber or steel) in a bid are used primarily to:", opts:["Guarantee the contractor a fixed profit no matter what","Protect the contractor from absorbing unpredictable material price increases between bid submission and purchase","Eliminate the need for any contingency","Lock material suppliers into a fixed price forever"], correct:1, explain:"Escalation clauses shift risk of material price volatility (partially or fully) to the owner, protecting the contractor's margin on long lead-time or volatile materials."},
+
+  {topic:"Estimating and Bidding", q:"A contractor wants a 20% GROSS MARGIN on a job with $80,000 in direct costs (margin calculated on the final selling price, not on cost). What should the bid price be?", opts:["$96,000","$100,000","$104,000","$88,000"], correct:1, explain:"For a 20% margin on price: Price × (1 − 0.20) = Cost, so Price = $80,000 ÷ 0.80 = $100,000. This differs from a 20% MARKUP on cost, which would instead be $80,000 × 1.20 = $96,000 — mixing up margin-on-price versus markup-on-cost is a classic estimating error.", commonlyMissed:true},
+  {topic:"Estimating and Bidding", q:"Two contractors both claim to add '15% profit' to a $100,000 cost job — one calculates it as a markup on cost, the other as a margin on the final price. Their resulting bid prices will be:", opts:["Identical, since both used '15%'", "Different — the margin-on-price method yields a higher bid price ($117,647) than the markup-on-cost method ($115,000) for the same nominal '15%'","Different, but the markup-on-cost method always yields the higher price","Impossible to determine without more information"], correct:1, explain:"Markup-on-cost: $100,000 × 1.15 = $115,000. Margin-on-price: Price = $100,000 ÷ (1 − 0.15) = $117,647. The same percentage produces different dollar results depending on which base it's applied to — a frequent source of bidding confusion.", commonlyMissed:true},
+  {topic:"Estimating and Bidding", q:"A bid includes a unit price of $45/linear foot for site utility trenching, with an estimated 800 linear feet, but the engineer's estimate shows only 750 linear feet as the likely actual quantity. If actual field quantities come in at 750 LF, standard unit-price contract practice generally means the contractor is paid:", opts:["For the original 800 LF regardless of actual quantity installed","For the actual 750 LF installed, at the agreed $45/LF unit rate — unit pricing adjusts to true field quantities rather than locking in the estimate", "Nothing, since the estimate didn't match","A renegotiated rate for the full contract"], correct:1, explain:"Unit-price contracts are specifically designed to true up to actual field-measured quantities at the agreed rate, unlike a lump-sum contract which would lock in the original estimated total regardless of actual quantity."},
+
+  // FINANCIAL MANAGEMENT (8)
+  {topic:"Financial Management", q:"Positive cash flow in a construction business means:", opts:["The business is profitable on paper only","More cash is coming in than going out during a given period","All invoices have been paid by the owner","The business owns more equipment than debt"], correct:1, explain:"Cash flow tracks actual cash movement; a business can be profitable on paper yet still run out of cash if receivables lag behind expenses."},
+  {topic:"Financial Management", q:"Overhead costs in a construction business generally refer to:", opts:["Direct materials used on a specific job","Ongoing business expenses not tied to one specific job, like office rent, insurance, and admin salaries","Subcontractor invoices for a project","Change order costs"], correct:1, explain:"Overhead is the cost of running the business generally (office, admin, insurance) rather than a specific job's direct costs."},
+  {topic:"Financial Management", q:"A contractor's break-even point is the level of revenue at which:", opts:["Profit is maximized","Total revenue equals total costs, with zero profit or loss","The business must close","Taxes are no longer owed"], correct:1, explain:"Break-even is the sales/revenue level where total costs are exactly covered — beyond that point, additional revenue becomes profit."},
+  {topic:"Financial Management", q:"Under cash-basis accounting, income is recorded when:", opts:["A contract is signed","Cash is actually received, not necessarily when it's earned","Work begins on a project","An invoice is sent to the client"], correct:1, explain:"Cash-basis accounting records income and expenses when cash actually changes hands, unlike accrual accounting which records them when earned/incurred."},
+  {topic:"Financial Management", q:"Accounts receivable represents:", opts:["Money the business owes to suppliers","Money owed to the business by clients for completed work","Cash reserved for payroll","Depreciation on equipment"], correct:1, explain:"Accounts receivable is money owed to the business by customers, typically for invoiced work not yet paid."},
+  {topic:"Financial Management", q:"Why is job costing (tracking actual cost per project) important for a contractor?", opts:["It's only useful for tax filing","It shows whether each job was profitable and improves future estimating accuracy","It replaces the need for insurance","It's required only for government contracts"], correct:1, explain:"Job costing compares actual costs to the estimate on each project, revealing profitability and sharpening future bids."},
+  {topic:"Financial Management", q:"Under accrual-basis accounting, revenue is recorded when:", opts:["Cash is physically deposited","It is earned (e.g., work is completed or a milestone is met), regardless of when cash is received","The fiscal year ends","A customer signs a new contract"], correct:1, explain:"Accrual accounting recognizes revenue when it's earned, not necessarily when cash actually arrives — the opposite of cash-basis timing."},
+  {topic:"Financial Management", q:"A healthy current ratio (current assets ÷ current liabilities) above 1.0 generally suggests:", opts:["The business has no debt at all","The business has enough short-term assets to cover its short-term obligations","The business is guaranteed to be profitable","The business overpaid its taxes"], correct:1, explain:"A current ratio above 1.0 indicates short-term assets exceed short-term liabilities, a sign of reasonable short-term financial health."},
+  {topic:"Financial Management", q:"A contractor is profitable per their income statement but keeps running short on cash to make payroll. The most likely explanation is:", opts:["The business is committing tax fraud","Revenue is being recognized (accrual) faster than cash is actually being collected, creating a cash flow timing gap","Profit and cash are always identical, so this can't happen","The business needs to lower its prices immediately"], correct:1, explain:"Accrual profit can outpace actual cash collections, especially with slow-paying clients or heavy retainage — a classic profitable-but-cash-poor scenario."},
+  {topic:"Financial Management", q:"On a $500,000 project with 10% retainage, how much of the contract value is withheld from progress payments until final completion?", opts:["$5,000","$50,000","$10,000","$500"], correct:1, explain:"10% of $500,000 is $50,000 held back as retainage until the work is completed and accepted."},
+  {topic:"Financial Management", q:"Which financial statement shows a company's assets, liabilities, and equity at a specific point in time?", opts:["Income statement","Balance sheet","Cash flow statement","Change order log"], correct:1, explain:"The balance sheet is a snapshot at a point in time of what a company owns (assets), owes (liabilities), and the owner's equity — unlike the income statement, which covers a period."},
+  {topic:"Financial Management", q:"A contractor's gross profit margin is calculated as:", opts:["Net income divided by total assets","(Revenue minus direct job costs) divided by revenue","Revenue divided by overhead","Total assets minus total liabilities"], correct:1, explain:"Gross profit margin measures the percentage of revenue remaining after direct job costs, before overhead and other expenses are subtracted."},
+  {topic:"Financial Management", q:"Over-billing (billing a client for more work than has actually been completed) on a project creates what on the contractor's balance sheet?", opts:["An asset called 'costs in excess of billings'","A liability called 'billings in excess of costs,' representing work still owed to the client","No effect on the balance sheet at all","Automatic profit that can be recognized immediately"], correct:1, explain:"Over-billing creates a liability (billings in excess of costs) since the contractor has been paid for work it hasn't yet performed — the opposite of under-billing, which creates an asset."},
+  {topic:"Financial Management", q:"A contractor relies heavily on one large client for 70% of annual revenue. From a financial risk standpoint, this represents:", opts:["No real risk, since the revenue is guaranteed","Significant customer concentration risk — losing that client could severely impact cash flow and viability","A tax advantage under Utah law","A situation requiring no contingency planning"], correct:1, explain:"Heavy reliance on one client creates concentration risk; losing that relationship can create an outsized, sudden impact on revenue and cash flow."},
+  {topic:"Financial Management", q:"Depreciation on a contractor's equipment (like an excavator) is best described as:", opts:["A cash expense paid monthly to a bank","A non-cash accounting expense that spreads the equipment's cost over its useful life","A one-time tax penalty","Identical to a loan payment"], correct:1, explain:"Depreciation allocates an asset's cost over its useful life as a non-cash accounting expense — it reduces reported profit without an associated current cash outflow."},
+
+  {topic:"Financial Management", q:"A contractor has current assets of $180,000 and current liabilities of $130,000. Their working capital is:", opts:["$310,000","$50,000","$1.38 (a ratio, not a dollar figure)","Cannot be determined from this information"], correct:1, explain:"Working capital = current assets − current liabilities = $180,000 − $130,000 = $50,000. (Note this is different from the CURRENT RATIO, which would be 180,000 ÷ 130,000 ≈ 1.38 — a ratio, not a dollar amount; mixing these two up is a common error.)"},
+  {topic:"Financial Management", q:"A surety evaluating a contractor's BONDING capacity typically weighs working capital and net worth most heavily because:", opts:["Bonding capacity is based solely on years in business, not financials","These figures indicate the contractor's real financial cushion to absorb losses or cash flow gaps on a job, regardless of how many years of experience or how strong the contractor's trade skills are","Bonding capacity is set entirely by the contractor's license classification","Sureties only look at profit, never working capital or net worth"], correct:1, explain:"A financially thin contractor — even a highly experienced, skilled one — can be a bonding risk, since bonding capacity reflects the ability to absorb financial shocks, not construction competence alone."},
+  {topic:"Financial Management", q:"A contractor's income statement shows a healthy $150,000 net profit for the year, but their cash balance actually DECREASED by $40,000 over the same period. The most likely explanation involves differences between:", opts:["This is impossible — profit and cash change must always match","Accrual-based profit recognition versus actual cash timing — e.g., growth in unbilled receivables, heavy equipment purchases paid in cash, or debt principal payments that don't appear on the income statement", "A bookkeeping error that must be corrected immediately","Sales tax being miscalculated"], correct:1, explain:"Profit (income statement, accrual basis) and cash change (cash flow) are genuinely different measures — growing receivables, capital purchases, and debt principal payments can all reduce cash without reducing reported profit, a distinction that trips up many contractors."},
+
+  // LABOR LAWS (8)
+  {topic:"Labor Laws", q:"Under federal labor law (FLSA), non-exempt employees who work over 40 hours in a week are generally entitled to:", opts:["No additional pay","Overtime pay, typically at 1.5x their regular rate","Comp time only, never pay","A flat bonus regardless of hours"], correct:1, explain:"The Fair Labor Standards Act requires overtime pay (typically time-and-a-half) for non-exempt employees working over 40 hours per week."},
+  {topic:"Labor Laws", q:"Misclassifying an employee as an independent contractor can expose a contracting business to:", opts:["No real consequences if the worker agrees","Back taxes, penalties, and liability for unpaid workers' comp/unemployment insurance","A tax refund","Automatic license renewal"], correct:1, explain:"Misclassification carries real financial and legal risk, including back payroll taxes, penalties, and unpaid insurance contributions."},
+  {topic:"Labor Laws", q:"Employers are generally required to verify a new employee's identity and work eligibility using which federal form?", opts:["W-9","Form I-9","1099-NEC","W-4 only"], correct:1, explain:"Form I-9 is used to verify identity and employment authorization for new hires."},
+  {topic:"Labor Laws", q:"On a public works project, what wage requirement often applies that doesn't apply to typical private jobs?", opts:["Federal minimum wage only, with no exceptions","Prevailing wage rates set for that trade and locality","No wage laws apply on public projects","Only union employees may be paid"], correct:1, explain:"Public works projects often require paying prevailing wage rates, set by government surveys of local wage standards for each trade."},
+  {topic:"Labor Laws", q:"Which of these is a key factor in determining whether a worker is an employee vs. an independent contractor?", opts:["The worker's preferred job title","The degree of control the business has over how, when, and where the work is performed","Whether the worker owns a truck","How many years the worker has been in the trade"], correct:1, explain:"Behavioral and financial control — how much the business directs the work — is a central factor in employee vs. contractor classification tests."},
+  {topic:"Labor Laws", q:"What must employers generally maintain regarding workplace injuries under OSHA recordkeeping rules?", opts:["Nothing, unless someone is hospitalized","A log of recordable work-related injuries and illnesses (e.g., OSHA Form 300)","A public press release for every injury","Only verbal notification to OSHA"], correct:1, explain:"Covered employers must maintain injury and illness records, such as the OSHA 300 log, for recordable workplace incidents."},
+  {topic:"Labor Laws", q:"Federal minimum wage sets a floor that:", opts:["Always overrides a higher state minimum wage","Applies unless a state or local minimum wage is higher, in which case the higher rate applies","Only applies to salaried employees","Doesn't apply to construction workers"], correct:1, explain:"Employers must pay at least the highest applicable minimum wage among federal, state, and local requirements."},
+  {topic:"Labor Laws", q:"A jobsite apprentice working under a licensed contractor typically must:", opts:["Hold their own separate contractor license","Work under appropriate supervision per apprenticeship/training program requirements","Be paid the same rate as a licensed journeyman immediately","Skip all safety training"], correct:1, explain:"Apprentices generally work under defined supervision within a training program rather than independently or unsupervised."},
+  {topic:"Labor Laws", q:"A worker sets their own hours, uses their own tools, works for multiple contractors simultaneously, and is paid a flat fee per project. These facts tend to support classifying them as:", opts:["An employee, regardless of these facts","An independent contractor, since they show low behavioral/financial control by the hiring business","Neither an employee nor a contractor","Always an employee if they work more than 10 hours a week"], correct:1, explain:"Autonomy over schedule/methods, use of own tools, working for multiple clients, and flat-fee pay are hallmark indicators supporting independent contractor status."},
+  {topic:"Labor Laws", q:"An employer requires a worker to use company tools, follow a set daily schedule, work exclusively for that company, and receives ongoing training and supervision. These facts tend to support classifying them as:", opts:["An independent contractor","An employee, due to the high degree of behavioral and economic control exercised","A subcontractor automatically","A volunteer"], correct:1, explain:"High control over schedule, tools, exclusivity, and training/supervision are classic indicators of an employment relationship, not independent contractor status."},
+  {topic:"Labor Laws", q:"A salaried supervisor who regularly directs the work of other employees and has hiring/firing input is most likely classified under the FLSA as:", opts:["Non-exempt, entitled to overtime regardless of duties","Potentially exempt from overtime under the executive exemption, if duties and salary tests are met","Automatically an independent contractor","Ineligible for a salary of any kind"], correct:1, explain:"The FLSA executive exemption can apply to supervisory employees meeting salary and duties tests, exempting them from overtime pay requirements."},
+  {topic:"Labor Laws", q:"An employee is injured on the job and workers' compensation applies. In most cases, the employee's ability to sue the employer directly for the injury (outside the workers' comp system) is:", opts:["Unlimited and encouraged","Generally barred, since workers' comp is typically the exclusive remedy for workplace injuries","Only available on weekends","Always allowed for injuries over $10,000"], correct:1, explain:"Workers' compensation is generally the exclusive remedy for workplace injuries, meaning the employee generally cannot also sue the employer in most ordinary injury cases."},
+  {topic:"Labor Laws", q:"A contractor pays a crew a flat day rate regardless of hours worked, sometimes exceeding 50 hours/week, without extra pay. If these workers are properly classified as non-exempt employees, this practice:", opts:["Is compliant as long as the day rate is generous","Likely violates overtime requirements, since day-rate pay doesn't automatically satisfy FLSA overtime obligations for non-exempt workers","Is only a problem for salaried employees","Is legal in all states regardless of hours"], correct:1, explain:"Non-exempt employees are generally owed overtime for hours over 40/week regardless of pay structure; a flat day rate alone doesn't satisfy this requirement without proper overtime calculation."},
+  {topic:"Labor Laws", q:"A contractor with several employees fails to carry required workers' compensation insurance. If a worker is injured, the contractor faces:", opts:["No consequences as long as the worker doesn't complain","Potential direct personal liability for the injury, penalties, and possible license action, since required coverage was missing","A one-time warning with no further exposure","Automatic dismissal of the injury claim"], correct:1, explain:"Failing to carry required workers' comp coverage can expose the employer to direct liability for the injury, statutory penalties, and disciplinary action against their license."},
+  {topic:"Labor Laws", q:"Under the FLSA, overtime is generally calculated based on hours worked beyond 40 in a single:", opts:["Calendar month","Workweek (a fixed, recurring 168-hour period), not necessarily a calendar week","Two-week pay period averaged together","Calendar year"], correct:1, explain:"Overtime is calculated per workweek — a fixed, regularly recurring 7-day/168-hour period the employer defines — not averaged across pay periods or months.", commonlyMissed:true},
+  {topic:"Labor Laws", q:"An employer wants to avoid paying overtime by giving an employee 'comp time' (time off later) instead of overtime pay for hours over 40 in a week. For most private-sector non-exempt employees, this practice is:", opts:["Fully compliant and commonly used to avoid overtime pay","Generally not permitted under the FLSA for private employers — overtime for non-exempt employees is normally paid in wages, not banked comp time","Only illegal if the employee objects","Required by federal law instead of paying cash overtime"], correct:1, explain:"Private-sector employers generally can't substitute comp time for cash overtime pay owed to non-exempt employees under the FLSA — that practice is more common in public-sector employment."},
+  {topic:"Labor Laws", q:"Federal law generally imposes daily overtime requirements (e.g., overtime after 8 hours in a single day) on private employers:", opts:["Always, in every state, as a floor under federal law","Not by default — the FLSA sets a weekly 40-hour threshold, and daily overtime rules (if any) come from state law, not federal law","Only for construction workers specifically","Only when the contract explicitly waives it"], correct:1, explain:"The FLSA's overtime trigger is weekly (over 40 hours), not daily; any daily overtime requirement would have to come from a state law, since federal law doesn't impose one by default."},
+  {topic:"Labor Laws", q:"A worker travels between two job sites during the middle of their workday, staying on the clock the whole time. This travel time is generally:", opts:["Never compensable under any circumstance","Compensable work time, since it occurs during the workday between duty locations","Only compensable if it exceeds 2 hours","The employee's own responsibility to absorb unpaid"], correct:1, explain:"Travel between job sites during the workday is generally compensable hours worked, distinct from an employee's normal home-to-first-jobsite commute, which typically isn't."},
+  {topic:"Labor Laws", q:"An employee is required to remain on the jobsite during a short break, unable to leave or use the time freely. Under FLSA rules, short breaks (typically under about 20 minutes) are usually treated as:", opts:["Always unpaid, regardless of length or restrictions","Compensable work time that counts toward hours worked, including for overtime calculations","Only paid if the employee requests it","Automatically unpaid if longer than 5 minutes"], correct:1, explain:"Short rest breaks (typically under ~20 minutes) are generally counted as compensable hours worked under FLSA guidance, unlike longer bona fide meal periods where the employee is fully relieved of duty."},
+  {topic:"Labor Laws", q:"To qualify for the FLSA's executive/administrative overtime exemption, an employee generally must meet BOTH a duties test AND:", opts:["Be over the age of 21","A minimum salary threshold, paid on a salary basis rather than hourly","Have a college degree","Work for a company with over 500 employees"], correct:1, explain:"Overtime exemptions like executive/administrative require satisfying both a duties test (nature of the work) and a minimum salary-basis threshold — hourly workers generally can't be classified exempt regardless of duties."},
+
+  {topic:"Labor Laws", q:"A non-exempt employee earns $20/hour and also receives a $100 non-discretionary weekly production bonus. In a week they work 45 hours, their overtime rate calculation must:", opts:["Ignore the bonus entirely and pay overtime on the $20/hour rate only","Fold the non-discretionary bonus into the 'regular rate' used to calculate the overtime premium, not just use the base hourly rate alone", "Only apply if the bonus exceeds $500", "Treat the bonus as fully exempt from any wage calculation"], correct:1, explain:"Non-discretionary bonuses must generally be included when calculating an employee's 'regular rate' for overtime purposes — using only the base hourly rate and ignoring the bonus understates the overtime actually owed.", commonlyMissed:true},
+  {topic:"Labor Laws", q:"Two companies — a staffing agency and a contractor — jointly direct and control the same worker's daily tasks and schedule on a jobsite. Under a 'joint employer' analysis, wage and hour compliance obligations (like overtime) generally:", opts:["Fall solely on the staffing agency, since they issue the paycheck","Can be shared between both companies, since both may be considered joint employers responsible for FLSA compliance depending on their actual degree of control", "Fall solely on the contractor since the work happens at their jobsite","Don't apply at all in joint arrangements"], correct:1, explain:"Under a joint employer analysis, both companies exercising meaningful control over the worker can share FLSA compliance responsibility — simply not being the one who issues the paycheck doesn't eliminate wage and hour exposure."},
+  {topic:"Labor Laws", q:"An employer classifies a worker as exempt from overtime and pays a fixed weekly salary, but the worker's actual day-to-day duties are almost entirely manual labor with no supervisory or discretionary authority. This exempt classification is:", opts:["Valid, since they are paid a salary rather than hourly","Likely invalid — salary basis alone does not create an overtime exemption; the actual job DUTIES must also independently meet an exemption test, regardless of pay structure", "Automatically valid if the worker agreed to it in writing","Only a problem if the worker earns under minimum wage equivalent"], correct:1, explain:"Both the salary-basis AND duties tests must be met for an exemption to apply — paying someone a salary doesn't by itself exempt them from overtime if their actual duties are non-exempt manual work."},
+
+  // LICENSING (16) — largest exam section
+  {topic:"Licensing", q:"Which state agency oversees contractor licensing in Utah?", opts:["Utah Department of Commerce Insurance Division","Utah Division of Occupational and Professional Licensing (DOPL)","Utah Labor Commission","Utah State Construction Registrar"], correct:1, explain:"DOPL, under the Department of Commerce, administers contractor licensing and enforcement through its Construction Trades Bureau."},
+  {topic:"Licensing", q:"As of current DOPL rules, at what total project value (labor and materials combined) does work require a full Utah contractor license?", opts:["$3,000 or more","$5,000 or more","$7,000 or more","$10,000 or more"], correct:2, explain:"The licensing threshold was raised to $7,000 (labor and materials combined). Projects between $3,000 and $7,000 fall under the 'handyman exemption' — no license needed, but a one-time insurance/workers' comp affirmation must still be filed with DOPL. This changed from the older $3,000 threshold, so confirm against dopl.utah.gov if it's been a while since you checked."},
+  {topic:"Licensing", q:"What classification code identifies a Utah General Building Contractor license?", opts:["R100","B100","E100","S200"], correct:1, explain:"B100 is the General Building Contractor classification, covering structural work but not electrical, plumbing, or mechanical scopes."},
+  {topic:"Licensing", q:"A B100 licensee wants to install new electrical wiring on a remodel. What must they do?", opts:["Nothing — B100 covers all trades","Subcontract to a licensed electrical contractor","Self-perform since they're the GC of record","Get a same-day verbal waiver from DOPL"], correct:1, explain:"B100 is a structural license only; electrical, plumbing, and mechanical work must be performed by separately licensed trade contractors."},
+  {topic:"Licensing", q:"How much experience is generally required to qualify for a B100 license?", opts:["1 year (2,000 hours)","2 years (4,000 hours)","3 years (6,000 hours)","4 years (8,000 hours)"], correct:1, explain:"Utah requires 2 years of paid construction experience totaling at least 4,000 hours."},
+  {topic:"Licensing", q:"Of the required experience for a B100 qualifier, how much must be in a supervisory or managerial role?", opts:["None required","At least 6 months","At least 1 of the 2 years","All of it"], correct:2, explain:"Under Utah rule, at least one of the two required years must be in a supervisory or managerial capacity."},
+  {topic:"Licensing", q:"A contractor licensed and in good standing in another state for at least a year applies in Utah. What is true about the Business & Law exam?", opts:["Still mandatory regardless of out-of-state license","May be waived if the out-of-state license covers a similar scope and is active/in good standing","Only the trade exam is waived, not Business & Law","Exam is waived only for military veterans"], correct:1, explain:"Utah can waive the Business & Law exam for applicants with at least one year of active, similar-scope licensure in good standing elsewhere."},
+  {topic:"Licensing", q:"As of the rule change effective April 20, 2026, what is the minimum general liability insurance Utah requires a licensed contractor to carry?", opts:["$100,000 per occurrence / $300,000 aggregate (the old minimum)","$1,000,000 per occurrence / $3,000,000 aggregate","$500,000 per occurrence / $1,000,000 aggregate","No minimum is specified by rule"], correct:1, explain:"DOPL raised the minimum general liability coverage from $100,000/$300,000 to $1,000,000/$3,000,000 per occurrence/aggregate, effective April 20, 2026 under Utah Admin. Rule R156-55a-302d — double-check this is still current when you test, since it's a recent change."},
+  {topic:"Licensing", q:"DOPL can take disciplinary action against a contractor's license for which of the following?", opts:["Submitting a bid that wasn't the lowest","Working without required insurance or violating licensing law","Hiring a subcontractor with more experience","Advertising on social media"], correct:1, explain:"Operating without required insurance, unlicensed practice, or other statutory violations are common grounds for DOPL discipline, fines, or license action."},
+  {topic:"Licensing", q:"What is the minimum passing score on the Utah Contractors Business and Law exam?", opts:["60%","65%","70%","75%"], correct:2, explain:"A minimum score of 70% is required to pass the Utah Business and Law exam."},
+  {topic:"Licensing", q:"Who administers and proctors the Utah contractor Business and Law exam, both developing its content and running the testing centers?", opts:["DOPL directly runs all testing centers itself","Prov (Prov Exams) — under contract with DOPL, both developing exam content and operating the testing centers/online proctoring","PSI Examination Services","NASCLA directly"], correct:1, explain:"Prov is DOPL's contracted exam vendor for Utah contracting exams — it develops the content and runs both physical testing centers and the Examroom online proctoring option. (Some third-party sites incorrectly reference PSI for Utah — always confirm against dopl.utah.gov.)"},
+  {topic:"Licensing", q:"What happens if a person performs contracting work above the licensing threshold without a valid license?", opts:["Nothing, as long as the work is done well","They can face fines, be barred from enforcing payment through the courts, and face other DOPL/legal penalties","They automatically get a temporary license","Only the customer faces consequences"], correct:1, explain:"Unlicensed contracting exposes the individual to civil penalties, fines, and can bar them from suing to collect payment for the unlicensed work."},
+  {topic:"Licensing", q:"A Utah contractor license generally must be renewed:", opts:["Only once, for life","On a periodic renewal cycle set by DOPL, typically requiring a fee and good standing","Every 10 years automatically, no action needed","Never — licenses don't expire"], correct:1, explain:"Contractor licenses require periodic renewal with DOPL, including a renewal fee and maintaining required insurance/bonding."},
+  {topic:"Licensing", q:"If a licensed business changes its qualifying party (e.g., the qualifier leaves the company), the business generally must:", opts:["Do nothing — the license stays valid indefinitely regardless","Notify DOPL and designate a new qualifier within the required timeframe, or risk losing the license","Immediately dissolve the company","Automatically transfer the license to the departing qualifier"], correct:1, explain:"Since the license is tied to the qualifier's experience and exam, losing that qualifier without replacement can jeopardize the license."},
+  {topic:"Licensing", q:"A homeowner performing construction work exclusively on their own residence is generally:", opts:["Required to hold a full contractor license regardless","Exempt from the contractor licensing requirement for their own home","Required to hire a licensed GC for any work at all","Subject to the same bonding requirements as a licensed contractor"], correct:1, explain:"Utah generally exempts owners performing work on their own residence from the contractor license requirement."},
+  {topic:"Licensing", q:"What is a surety bond required for Utah contractor licensure primarily meant to protect?", opts:["The contractor's own equipment","Consumers/the public against certain contractor misconduct or financial harm, up to the bond amount","The contractor's personal savings","The state government's tax revenue"], correct:1, explain:"The license bond provides a limited fund the public can claim against for specific contractor violations, separate from liability insurance."},
+  {topic:"Licensing", q:"A B100-licensed contractor wants to also occasionally perform small plumbing repairs incidental to a remodel. The correct approach is generally to:", opts:["Perform minor plumbing freely since it's 'incidental' to the structural work","Still subcontract to or coordinate with a licensed plumbing contractor, since B100 doesn't cover plumbing scope","Get a one-time verbal approval from the homeowner instead","Assume DOPL allows it if the job is under $3,000"], correct:1, explain:"B100 remains a structural-only license; plumbing work generally requires a separately licensed plumbing contractor regardless of how minor or 'incidental' it seems."},
+  {topic:"Licensing", q:"An applicant has 18 months of construction experience, 4 months of which were supervisory, plus a 2-year construction management associate's degree. How does the degree typically apply toward the B100 experience requirement?", opts:["It cannot be used at all toward licensure","It can credit up to one year toward the supervisory/managerial portion of the experience requirement, per Utah rule","It replaces the entire 2-year experience requirement automatically","It only counts if paired with a 4-year bachelor's degree"], correct:1, explain:"A qualifying construction management degree can credit up to one year toward the supervisory/managerial experience requirement, helping applicants who are otherwise short on that portion."},
+  {topic:"Licensing", q:"A licensed contractor allows an unlicensed individual to pull permits and represent themselves as the license holder ('license lending'). This practice:", opts:["Is a common and accepted industry practice with no risk","Is a serious licensing violation that can result in discipline against the actual licensee","Only creates risk for the unlicensed individual, not the license holder","Is legal as long as the licensee is paid a fee"], correct:1, explain:"License lending — allowing another party to use your license without your actual oversight — is a significant violation that puts the license holder's own credential at risk of discipline."},
+  {topic:"Licensing", q:"A contractor's license lapses because the renewal fee wasn't paid on time. If they continue performing licensed-level work during the lapse, they are effectively:", opts:["Still fully licensed since the lapse is just paperwork","Operating unlicensed during that period, exposing them to the same risks as never having been licensed","Automatically granted a 1-year grace period with full legal protection","Only at risk if a customer specifically complains"], correct:1, explain:"Performing licensed work during a lapsed period generally carries the same unlicensed-practice exposure as never having held a license, regardless of the lapse being unintentional."},
+  {topic:"Licensing", q:"An out-of-state applicant has held an active, similar-scope contractor license in good standing for 8 months (not yet a full year). Regarding the Utah Business & Law exam requirement, they are:", opts:["Automatically exempt since they hold any out-of-state license","Not yet eligible for the experience-based exam waiver, since Utah's waiver generally requires at least one full year of active, similar-scope licensure","Exempt only if their home state is adjacent to Utah","Required to retake their home state's exam instead"], correct:1, explain:"The waiver generally requires at least one full year of active, similar-scope licensure in good standing — 8 months would not yet meet that threshold."},
+  {topic:"Licensing", q:"A DOPL disciplinary action results in a contractor's license being placed on probation rather than revoked. This generally means the contractor:", opts:["Has no restrictions of any kind going forward","May continue operating but under specific conditions or monitoring set by DOPL, with revocation possible if violated","Automatically loses the license within 30 days regardless","Must immediately dissolve their business entity"], correct:1, explain:"Probation allows continued licensed operation under DOPL-imposed conditions; violating those conditions can escalate to suspension or revocation."},
+  {topic:"Licensing", q:"Two business partners each hold separate, valid B100 qualifier credentials, but only one is officially designated as the qualifying party on the license. If that designated qualifier leaves the company, the OTHER partner's personal experience:", opts:["Automatically becomes the new qualifying basis with zero paperwork","May be able to support a new qualifier designation, but the business must still formally update its qualifier of record with DOPL","Is irrelevant since only the original qualifier's credentials ever count","Voids the license permanently regardless of the other partner's qualifications"], correct:1, explain:"Even if another qualified individual is available, licensing rules generally require formally updating who the designated qualifier of record is with DOPL — it isn't automatic."},
+
+  {topic:"Licensing", q:"A contractor is licensed R100 (Residential and Small Commercial) and is offered a $300,000 commercial remodel job. Given R100's project value cap on small commercial work, the contractor should recognize that:", opts:["R100 covers any project regardless of value, so they can proceed", "This project likely exceeds R100's small-commercial scope/value cap, meaning a B100 (uncapped general) or the appropriate higher classification may be required instead", "Only a specialty S-classification could ever cover this","R100 and B100 are interchangeable in every situation"], correct:1, explain:"R100 is scoped to residential plus SMALL commercial work under a value cap; a $300,000 commercial remodel is likely to exceed that scope, meaning the contractor needs to confirm whether B100 or another classification is actually required for this job."},
+  {topic:"Licensing", q:"An applicant is licensed and in good standing as a qualifier in a state Utah recognizes, but has only held that license for 10 months. Compared to an applicant with 14 months in the same situation, the 10-month applicant:", opts:["Qualifies for the same exam waiver, since both have 'about a year'","Does NOT yet qualify for the experience-based Business & Law exam waiver, since Utah's waiver threshold requires at least a full year (12 months) — 10 months falls short even though it looks close","Automatically qualifies because 10 months rounds up to a year","Is treated identically to someone with zero months of experience"], correct:1, explain:"The waiver threshold is a genuine cutoff at one full year — 10 months, despite being close, does not satisfy it, illustrating how these thresholds are applied literally rather than 'approximately.'"},
+  {topic:"Licensing", q:"A qualifying construction management degree can credit up to one year toward the B100 experience requirement's supervisory/managerial portion. This means the degree:", opts:["Eliminates the entire 2-year experience requirement outright","Can substitute for the supervisory-year portion specifically, but doesn't by itself establish that the applicant has met the full requirement — actual field experience details still need to be confirmed with DOPL for the specific applicant's situation", "Only counts if paired with 4,000 hours of unrelated retail experience","Has no bearing on licensure experience at all"], correct:1, explain:"The degree credit applies specifically to the supervisory/managerial portion of the requirement. Because how it interacts with total-hours requirements can vary by applicant specifics, this is exactly the kind of edge case worth confirming directly with DOPL rather than assuming — a good real-world habit, not just an exam answer."},
+
+  // LIEN LAWS (7) — weak
+  {topic:"Lien Laws", q:"What is a mechanics lien filed by a contractor or supplier meant to secure?", opts:["A tax refund","Payment for labor or materials furnished to improve real property","A building permit extension","Priority parking on site"], correct:1, explain:"A mechanics lien is a legal claim against real property to secure payment for labor, services, or materials that improved that property."},
+  {topic:"Lien Laws", q:"Why is prompt attention to preliminary notice and lien filing deadlines important for a contractor?", opts:["They have no real deadlines","Missing statutory deadlines can forfeit lien rights to secure payment","They only apply to commercial projects","They are optional paperwork"], correct:1, explain:"Lien rights are strictly time-bound by statute; missing a preliminary notice or filing deadline can permanently waive the right to lien the property."},
+  {topic:"Lien Laws", q:"A subcontractor who was never paid by the general contractor may still have lien rights against:", opts:["The general contractor's personal vehicle only","The improved real property itself, even though their contract was with the GC, not the owner","Nothing — only the GC can file a lien","The subcontractor's own equipment"], correct:1, explain:"Mechanics lien laws generally allow subcontractors and suppliers to lien the property they improved, even without a direct contract with the owner, provided notice/filing rules are followed."},
+  {topic:"Lien Laws", q:"What is a lien release (or lien waiver) typically used for?", opts:["To cancel a contract entirely","To document that a contractor/supplier has been paid and waives lien rights for that amount","To extend the filing deadline indefinitely","To transfer the lien to a different property"], correct:1, explain:"Lien waivers/releases confirm payment was received and that the party is giving up lien rights corresponding to that payment."},
+  {topic:"Lien Laws", q:"Filing a preliminary notice early in a project generally serves to:", opts:["Guarantee the contractor will be paid regardless of performance","Preserve the contractor's/supplier's right to later file a lien if unpaid","Replace the need for a written contract","Notify the IRS of the project"], correct:1, explain:"A preliminary notice is often a required first step to preserve lien rights down the road — without it, the ability to lien may be lost."},
+  {topic:"Lien Laws", q:"A homeowner who has already paid the general contractor in full, but the GC never paid a sub, may still face:", opts:["No further exposure whatsoever","A potential lien claim from the unpaid subcontractor against the property", "A refund from the state","Automatic dismissal of any lien filed"], correct:1, explain:"This 'double payment' risk is exactly why lien releases and preliminary notices matter — the owner can face a lien even after paying the GC."},
+  {topic:"Lien Laws", q:"A conditional lien waiver differs from an unconditional lien waiver in that it:", opts:["Never takes effect at all","Only takes effect once the referenced payment actually clears","Applies retroactively to all past payments automatically","Is illegal in Utah"], correct:1, explain:"A conditional waiver is effective only once the payment it references actually clears, protecting the payee if a check later bounces."},
+  {topic:"Lien Laws", q:"A supplier delivers materials to a project but the GC never engaged them directly — a sub-subcontractor did. The supplier's lien rights generally depend most on:", opts:["Whether the supplier is a large or small company","Whether they properly and timely served any required preliminary notice, since they're further removed from the owner in the contract chain","Whether the GC personally approved the delivery in writing","Nothing — suppliers never have lien rights"], correct:1, explain:"Parties further down the contract chain (suppliers to sub-subcontractors) generally face stricter notice requirements to preserve lien rights, since the owner may be unaware they're even involved."},
+  {topic:"Lien Laws", q:"A lien claimant files a valid mechanics lien but then fails to file a lawsuit to foreclose the lien within the statutory period after filing. The likely result is:", opts:["The lien remains valid and enforceable forever","The lien can expire or become unenforceable, since foreclosure deadlines are also strictly time-bound","The lien automatically converts to a judgment","Nothing changes — no deadline applies after filing"], correct:1, explain:"Beyond the initial filing deadline, statutes also set a window to actually foreclose (enforce) the lien in court — missing that deadline too can render the lien unenforceable.", commonlyMissed:true},
+  {topic:"Lien Laws", q:"An owner receives an unconditional final lien waiver from the GC before making the final payment, then later fails to actually pay. What does this create for the owner?", opts:["No risk at all — the waiver protects the owner regardless of payment","Real risk, since an unconditional waiver given before payment actually clears can be used against the claimant even if payment is never made", "A guarantee the GC will refund the waiver","Automatic forfeiture of the GC's license"], correct:1, explain:"Unconditional waivers are effective immediately upon signing regardless of whether payment later clears — which is exactly why using conditional waivers tied to actual payment is safer practice."},
+  {topic:"Lien Laws", q:"Lien priority (who gets paid first if a property is sold to satisfy multiple liens) is often determined primarily by:", opts:["Whichever lienholder is a licensed contractor","Statutory rules, which can consider factors like the date work began or when notice/lien was recorded, varying by jurisdiction","Whoever files last always wins","The size of the lien amount alone"], correct:1, explain:"Lien priority rules are jurisdiction-specific but often hinge on timing factors like when work commenced or when notices/liens were recorded, not simply lien size or filing order alone."},
+  {topic:"Lien Laws", q:"A property owner wants assurance that no hidden unpaid subs or suppliers could later lien their newly completed home. The best practice to request from the GC before final payment is:", opts:["A verbal assurance that everyone was paid","A full set of conditional (or unconditional, post-payment) lien waivers and releases from the GC and all subs/suppliers who provided notice","Nothing — liens can't attach to a completed home","A copy of the GC's business license only"], correct:1, explain:"Collecting waivers/releases from the GC and all notice-serving subs/suppliers is the standard way to confirm the chain of payment before final release of funds."},
+  {topic:"Lien Laws", q:"A contractor's preliminary notice was served, but it listed an incorrect legal description of the property. This kind of defect could:", opts:["Never matter since preliminary notices are purely optional paperwork","Potentially invalidate the notice and jeopardize lien rights, since accuracy in required notice content is often strictly enforced","Only matter if the amount owed exceeds $50,000","Automatically be corrected by the county recorder for free"], correct:1, explain:"Because lien rights are statutorily strict, errors in required notice content (like the legal property description) can undermine the notice's validity and the lien rights it was meant to preserve."},
+
+  {topic:"Lien Laws", q:"A subcontractor's preliminary notice deadline is generally measured from the date they FIRST furnished labor/materials, while their lien FILING deadline is generally measured from the date they LAST furnished labor/materials. If a sub worked on a project from March 1 to March 30, this means:", opts:["Both deadlines are measured from the same date, March 1", "Both deadlines are measured from the same date, March 30", "The preliminary notice deadline clock started around March 1 (first furnishing), while the lien filing deadline clock starts from March 30 (last furnishing) — two different trigger dates for two different deadlines", "Neither deadline applies since the work was completed within the same month"], correct:2, explain:"Preliminary notice and lien filing deadlines are commonly triggered by different events — first furnishing versus last furnishing — and conflating the two trigger dates is a frequent, costly lien-law mistake.", commonlyMissed:true},
+  {topic:"Lien Laws", q:"A GC receives an invoice from a sub for $50,000 but only pays $35,000 due to a good-faith dispute over back-charges. The sub is considering whether to file a lien for the unpaid $15,000. Filing a lien in this situation:", opts:["Is never allowed if any payment at all was made","Can generally still be pursued for the legitimately unpaid balance, since a partial payment doesn't automatically waive lien rights for the remaining unpaid amount — though the back-charge dispute itself may still need separate resolution", "Automatically resolves the underlying back-charge dispute in the sub's favor","Voids the sub's original contract with the GC"], correct:1, explain:"Partial payment doesn't waive lien rights to the legitimately unpaid remainder; the lien remedy and the underlying billing dispute are related but distinct issues that may both need addressing."},
+
+  // PROJECT MANAGEMENT (7)
+  {topic:"Project Management", q:"A critical path in a project schedule refers to:", opts:["The most expensive line item in the budget","The sequence of tasks that determines the shortest possible project duration","A backup plan if the main plan fails","The last task performed before closeout"], correct:1, explain:"The critical path is the longest chain of dependent tasks; delays on it directly delay the whole project."},
+  {topic:"Project Management", q:"A punch list is used to:", opts:["Track daily labor hours","Document remaining minor items to complete before final acceptance","Record change order pricing","List potential subcontractors to hire"], correct:1, explain:"A punch list itemizes outstanding minor deficiencies or tasks that must be finished before the owner accepts the project as complete."},
+  {topic:"Project Management", q:"Float (or slack) in scheduling refers to:", opts:["The amount of time a task can be delayed without affecting the project finish date","A type of concrete finishing tool","Extra materials ordered as a buffer","The contractor's profit margin"], correct:0, explain:"Float is the schedule flexibility a non-critical-path task has before it starts impacting the overall completion date."},
+  {topic:"Project Management", q:"Why is a pre-construction meeting with subcontractors valuable?", opts:["It's legally required before any permit is issued","It aligns expectations on schedule, safety, and scope before work starts","It replaces the need for a written contract","It's only useful for large commercial jobs"], correct:1, explain:"Pre-construction meetings align the team on schedule, site logistics, safety, and scope before work begins, reducing costly misunderstandings."},
+  {topic:"Project Management", q:"Which of these is the best way to manage subcontractor quality on a job site?", opts:["Trust verbal assurances only, no inspections","Set clear scope, schedule milestones, and conduct regular inspections","Only inspect after the final walkthrough","Avoid contact until the invoice is due"], correct:1, explain:"Ongoing inspection against clearly defined scope and milestones is standard practice for quality control on subcontracted work."},
+  {topic:"Project Management", q:"A Gantt chart is commonly used on a construction project to:", opts:["Track payroll deductions","Visually display tasks against a timeline, showing sequence, duration, and overlap","Record material defects","Calculate sales tax owed"], correct:1, explain:"Gantt charts display project tasks as bars along a timeline, making sequencing, duration, and overlaps easy to visualize."},
+  {topic:"Project Management", q:"Submittals (such as shop drawings or material samples) are used on a project to:", opts:["Replace the need for a contract","Get owner/architect approval on specific materials or methods before they're installed","Calculate the final invoice","Register the contractor's license"], correct:1, explain:"Submittals let the owner or design team review and approve specific products or methods before installation, catching issues early."},
+  {topic:"Project Management", q:"A task on the critical path slips by 3 days with no mitigation. What is the most likely direct effect on the overall project?", opts:["No effect, since only non-critical tasks matter","The overall project completion date is also likely delayed by approximately 3 days, since critical path tasks have zero float", "The project will automatically finish early to compensate","Only the budget is affected, never the schedule"], correct:1, explain:"By definition, critical path tasks have no float — any delay on them pushes back the entire project's finish date by roughly the same amount, absent schedule compression efforts."},
+  {topic:"Project Management", q:"A subcontractor consistently finishes their scope late but always within their own individual float (they're not on the critical path). What's the biggest risk of ignoring this pattern?", opts:["There is no risk since float absorbs the delay","Repeated float consumption can eventually erode all remaining float, turning that path critical and threatening the overall schedule","It always improves the project's final schedule","It has no bearing on other trades' work"], correct:1, explain:"Float isn't unlimited — chronically consuming it can convert a previously non-critical path into a new critical path, putting the overall completion date at risk."},
+  {topic:"Project Management", q:"Fast-tracking a schedule (starting some phases before prior phases fully finish) primarily trades:", opts:["Nothing — it has no tradeoffs","Faster completion for increased coordination complexity and rework risk if upstream work changes","Cost for quality with no schedule impact","Safety for speed by definition"], correct:1, explain:"Fast-tracking overlaps sequential phases to compress schedule, but increases coordination risk and potential rework if earlier-phase decisions change after later work has begun."},
+  {topic:"Project Management", q:"A project is tracking behind schedule mid-project. 'Crashing' the schedule to catch up typically means:", opts:["Simply extending the deadline instead","Adding resources (labor, shifts, equipment) to critical path tasks to shorten their duration, usually at increased cost","Removing scope from the contract unilaterally","Waiting and hoping the schedule self-corrects"], correct:1, explain:"Crashing means compressing critical path task durations by adding resources, typically increasing direct costs to regain lost schedule time."},
+  {topic:"Project Management", q:"During a pre-construction meeting, the GC and key subs disagree on the sequencing of two interdependent trades. The best resolution approach is to:", opts:["Ignore the disagreement and address it if it becomes a problem later","Resolve and document the agreed sequencing before work begins, since ambiguity here often causes costly field conflicts later","Let each trade proceed on their own separate schedule with no coordination","Cancel the project"], correct:1, explain:"Resolving sequencing conflicts before work starts, and documenting the agreement, prevents costly on-site conflicts and rework once trades are actively working."},
+  {topic:"Project Management", q:"A project manager notices the punch list keeps growing even as major systems are being finished. This pattern most likely indicates:", opts:["The project is ahead of schedule","Quality control issues occurring during construction rather than being caught and addressed in real time","The owner is being overly picky with no real basis","Nothing of concern — punch lists always grow late in projects"], correct:1, explain:"A rapidly growing punch list late in construction often signals that quality issues weren't caught and corrected during the work itself, requiring more end-of-project cleanup."},
+
+  {topic:"Project Management", q:"On a project schedule, Path A takes 20 days and is the critical path; Path B takes 15 days. What is the float available on Path B?", opts:["0 days","5 days","15 days","20 days"], correct:1, explain:"Float on a non-critical path equals the critical path duration minus that path's own duration: 20 − 15 = 5 days of float available on Path B before it would also become critical."},
+  {topic:"Project Management", q:"A project's critical path is 20 days. Path B, originally 15 days (5 days of float), experiences a 3-day delay due to a late material delivery. What is Path B's remaining float, and does the overall project finish date change?", opts:["Float is now 2 days remaining; project finish date is unaffected since Path B still has float left and hasn't become critical", "Float is now 8 days; the project finishes 3 days early", "The project is automatically delayed 3 days regardless of float", "Float doesn't change; only critical path delays ever matter"], correct:0, explain:"Path B had 5 days of float; a 3-day delay consumes 3 of those days, leaving 2 days of float remaining (5 − 3 = 2) — since Path B (18 days) is still under the 20-day critical path, the overall project finish date is unaffected, though the safety margin has shrunk."},
+
+  // RISK MANAGEMENT (7)
+  {topic:"Risk Management", q:"A performance bond primarily protects the project owner by guaranteeing:", opts:["The contractor will finish the project according to contract terms, or the surety will step in","The lowest possible price on the job","Free warranty work for 10 years","The subcontractors' personal income taxes"], correct:0, explain:"A performance bond ensures the surety completes or pays for completion of the contracted work if the contractor defaults."},
+  {topic:"Risk Management", q:"A payment bond is intended to protect:", opts:["The general contractor's profit margin","Subcontractors and suppliers by guaranteeing they'll be paid for labor/materials","The homeowner's mortgage lender","The building inspector's fees"], correct:1, explain:"Payment bonds guarantee subcontractors and material suppliers get paid even if the prime contractor fails to pay them directly."},
+  {topic:"Risk Management", q:"Builder's risk insurance is designed to cover:", opts:["A contractor's personal health expenses","Damage to a structure under construction from covered perils like fire or storm","A subcontractor's vehicle","The owner's future property taxes"], correct:1, explain:"Builder's risk insurance covers a building under construction against damage from covered causes of loss during the build."},
+  {topic:"Risk Management", q:"A 'waiver of subrogation' in a contract or insurance policy generally means:", opts:["The insurer gives up its right to sue a third party (like another contracting party) to recover a claim it paid","The contractor waives all insurance coverage","The owner waives the right to file any claim","Nothing — it has no real legal effect"], correct:0, explain:"A waiver of subrogation stops an insurer from pursuing a party (often another contractor on the same job) to recoup what it paid on a claim, per the contract terms."},
+  {topic:"Risk Management", q:"Requiring a subcontractor to carry their own general liability insurance and name the GC as an additional insured is a way to:", opts:["Increase the GC's own premiums unnecessarily","Transfer and share risk exposure with the party actually performing the work","Avoid needing a written subcontract","Guarantee the subcontractor never gets sued"], correct:1, explain:"This is a standard risk-transfer technique — pushing coverage responsibility to the party doing the work, with the GC protected as an additional insured."},
+  {topic:"Risk Management", q:"A certificate of insurance (COI) is a document that:", opts:["Guarantees full policy coverage details and cannot be altered","Provides proof of active insurance coverage, summarizing policy type, limits, and dates","Replaces the need for an actual insurance policy","Is only used for health insurance"], correct:1, explain:"A COI is a summary proof-of-coverage document, commonly requested before allowing a sub or vendor onto a job."},
+  {topic:"Risk Management", q:"An arbitration clause in a contract is a risk management tool because it:", opts:["Guarantees the contractor wins any dispute","Provides a defined, often faster/cheaper alternative to court litigation for resolving disputes","Eliminates the possibility of any dispute occurring","Voids the contract if a dispute ever arises"], correct:1, explain:"Arbitration clauses set an agreed-upon dispute resolution process, often faster and more predictable than litigation."},
+  {topic:"Risk Management", q:"A GC carries a $1M general liability policy but a jury awards $1.5M against them on a covered claim. What generally happens to the excess $500,000?", opts:["The insurer must pay it regardless of policy limits","It's typically the GC's own exposure beyond the policy limit, unless additional coverage like an umbrella policy applies","The claimant simply forfeits the excess amount","The bonding company automatically covers it instead"], correct:1, explain:"Standard liability policies cap payouts at the stated limit; amounts above that limit are the insured's own exposure unless excess/umbrella coverage is in place."},
+  {topic:"Risk Management", q:"A contractor's general liability policy typically does NOT cover:", opts:["Third-party bodily injury on the jobsite","The contractor's own faulty workmanship being repaired/replaced (in most standard policies)","Third-party property damage caused by the contractor's operations","Legal defense costs for a covered claim"], correct:1, explain:"Standard GL policies are generally designed around third-party injury/property damage, not as a warranty covering the cost to simply redo the contractor's own defective work."},
+  {topic:"Risk Management", q:"An 'occurrence' policy versus a 'claims-made' policy differ primarily in that occurrence policies:", opts:["Never actually pay out any claims","Cover incidents that happened during the policy period, regardless of when the claim is later filed","Only cover claims filed the same day as the policy starts","Are illegal for contractors to purchase"], correct:1, explain:"Occurrence policies respond to incidents that happened during the active policy period even if the claim surfaces years later, unlike claims-made policies tied to when the claim is filed."},
+  {topic:"Risk Management", q:"A subcontractor's insurance lapses mid-project without the GC's knowledge, and an injury occurs during the lapse. The GC's own risk exposure in this scenario is:", opts:["Zero, since it was the sub's insurance that lapsed","Potentially increased, since the GC may be pulled into claims/liability if the sub's coverage can't respond — a reason GCs track sub insurance status ongoing","Automatically transferred entirely to the injured worker","Eliminated by the original certificate of insurance forever, regardless of later lapses"], correct:1, explain:"A COI is only a snapshot at issuance — ongoing verification matters, since a lapsed sub policy can leave the GC more exposed if a claim arises during the gap."},
+  {topic:"Risk Management", q:"Why might a project owner require a payment bond even when hiring a well-established, financially strong general contractor?", opts:["Payment bonds are never actually necessary for strong contractors","Even strong GCs can have subs/suppliers go unpaid due to disputes or cash flow issues, and the bond protects against resulting liens/claims", "It's purely a formality with no practical protective value","Only weak contractors are legally required to provide them"], correct:1, explain:"Payment bonds protect against nonpayment down the contract chain regardless of the GC's overall financial strength — disputes or cash flow hiccups can still leave subs unpaid."},
+  {topic:"Risk Management", q:"A contractor is deciding whether to self-insure (retain) a risk versus transfer it via insurance or contract clauses. Self-insuring is generally most appropriate for risks that are:", opts:["Catastrophic and unpredictable, like major fire or collapse","Low-severity and relatively predictable/frequent, where the cost of insuring exceeds the expected loss","Always required to be insured by law regardless of size","Impossible to estimate at all"], correct:1, explain:"Self-insuring (retaining) risk fits low-severity, predictable exposures where insurance premiums would exceed expected losses; high-severity, unpredictable risks are better transferred via insurance."},
+
+  {topic:"Risk Management", q:"A GC is added as an 'additional insured' on a subcontractor's general liability policy, with a 'primary and non-contributory' endorsement. In the event of a covered claim involving both parties, this endorsement means:", opts:["The GC's own insurance must pay first, before the sub's policy responds at all","The sub's policy must respond first and primarily, without seeking contribution from the GC's own separate policy — protecting the GC's own loss history/premiums", "Only the sub's policy can ever be used, and the GC's own policy is cancelled","The endorsement has no practical effect beyond naming the GC"], correct:1, explain:"A primary and non-contributory endorsement ensures the sub's policy responds first for a covered claim without pulling in the GC's own policy for contribution — protecting the GC's separate coverage and loss experience, a meaningful distinction from simply being 'named' as additional insured."},
+  {topic:"Risk Management", q:"A GC is listed only as a 'certificate holder' on a sub's insurance policy, rather than as an 'additional insured.' The practical difference is that a certificate holder:", opts:["Has identical coverage rights to an additional insured","Generally just receives notice/proof that a policy exists, but is NOT actually covered under that policy for claims — a meaningfully weaker protection than being named an additional insured", "Has broader protection than an additional insured","Is automatically covered for all of the insured's operations"], correct:1, explain:"Being a certificate holder means you're on file to receive notice about the policy's existence/status — it does NOT extend actual coverage to you the way being named an additional insured does; conflating the two leaves real coverage gaps."},
+
+  // SAFETY (9) — weak
+  {topic:"Safety", q:"Which federal agency sets and enforces jobsite safety standards contractors must follow?", opts:["EPA","OSHA","FEMA","DOT"], correct:1, explain:"The Occupational Safety and Health Administration (OSHA) sets and enforces workplace safety standards on construction sites."},
+  {topic:"Safety", q:"Fall protection is generally required for construction workers once they are working at or above what height?", opts:["4 feet","6 feet","10 feet","12 feet"], correct:1, explain:"OSHA's construction standard generally requires fall protection at 6 feet or more above a lower level."},
+  {topic:"Safety", q:"An excavation deeper than 5 feet generally requires which OSHA protective measure, absent a stable rock determination?", opts:["No protection required under 10 feet","Sloping, benching, shoring, or shielding to prevent cave-in","A single warning sign only","Only a spotter, no physical protection"], correct:1, explain:"OSHA requires protective systems such as sloping, benching, shoring, or shielding for excavations 5 feet or deeper (with limited exceptions)."},
+  {topic:"Safety", q:"Before digging on a job site, a contractor should first:", opts:["Call 811 / Blue Stakes to have underground utilities located and marked","Wait for the neighbor's permission","Only check utility maps from memory","Begin digging and stop if something is hit"], correct:0, explain:"Utah's one-call utility locating service (Blue Stakes, dial 811) must be contacted before excavation to mark underground utility lines."},
+  {topic:"Safety", q:"A Hazard Communication (HazCom) program on a jobsite primarily ensures workers:", opts:["Get paid overtime automatically","Know about chemical hazards on site through labeling and safety data sheets (SDS)","Wear matching uniforms","Never handle any hazardous materials"], correct:1, explain:"HazCom requires labeling of hazardous chemicals and access to safety data sheets so workers understand risks and handling procedures."},
+  {topic:"Safety", q:"Who is generally responsible for making sure work is performed to the current enforceable safety and code standard on a project?", opts:["The homeowner exclusively","The licensed contractor performing the work","The material supplier","The mortgage lender"], correct:1, explain:"The licensed contractor bears responsibility for ensuring construction complies with current adopted safety and code standards."},
+  {topic:"Safety", q:"Personal Protective Equipment (PPE) on a job site is generally the responsibility of:", opts:["Solely the individual worker, with no employer role","The employer, who must assess hazards and provide/require appropriate PPE","Only required on federal projects","Optional, based on worker preference"], correct:1, explain:"Employers must assess workplace hazards and ensure appropriate PPE is provided and used, per OSHA requirements."},
+  {topic:"Safety", q:"A competent person on an OSHA-regulated jobsite is defined as someone who:", opts:["Has the most years of experience regardless of training","Can identify existing/predictable hazards and has authority to take corrective action","Is always the project owner","Only needs a valid driver's license"], correct:1, explain:"OSHA defines a competent person as one capable of identifying hazards and authorized to take prompt corrective measures."},
+  {topic:"Safety", q:"Scaffolding used on a construction site must generally be:", opts:["Self-certified by the crew with no inspection needed","Inspected by a competent person before each work shift for damage or instability","Used only on commercial projects","Left unguarded if under 10 feet tall"], correct:1, explain:"OSHA requires scaffolding to be inspected by a competent person before each shift and after any event that could affect its structural integrity."},
+  {topic:"Safety", q:"A worker is assigned to enter a below-grade utility vault to make a connection. Before entry, the crew should determine whether this qualifies as:", opts:["A routine task requiring no special precautions","A permit-required confined space, which requires atmospheric testing, ventilation, and entry/rescue procedures if applicable","Something only relevant to underground mining","A task exempt from OSHA rules if it takes less than 10 minutes"], correct:1, explain:"Enclosed, below-grade spaces with limited entry/exit and potential atmospheric hazards can qualify as permit-required confined spaces, triggering specific testing and entry procedures."},
+  {topic:"Safety", q:"An employer disciplines a worker specifically for reporting a safety hazard to OSHA. This action is:", opts:["A legitimate exercise of the employer's management rights","Illegal retaliation, since OSHA law protects workers from adverse action for reporting hazards or filing complaints","Only illegal if the hazard report turns out to be true","Permitted as long as it's documented as a performance issue"], correct:1, explain:"OSHA's whistleblower protections prohibit retaliating against employees for reporting hazards or filing safety complaints, regardless of how the report is later characterized."},
+  {topic:"Safety", q:"A subcontractor's employee is injured due to a hazard created by the general contractor's own crew, even though the GC never directly supervised the injured worker. Under OSHA's multi-employer worksite doctrine, the GC as 'controlling employer' can:", opts:["Never be cited, since only the sub's direct employer can be cited","Potentially be cited for the hazard, since a controlling employer has a duty to address hazards it creates or could reasonably detect and correct","Only be liable if they personally witnessed the injury occur","Automatically be exempt because they are the GC, not the sub"], correct:1, explain:"Under OSHA's multi-employer citation policy, a controlling employer (like a GC) can be cited for hazards it created, controls, or should have detected and corrected, even affecting another employer's workers."},
+  {topic:"Safety", q:"A ladder is set up at a construction site with its base 1 foot away from the wall it leans against, reaching a height of 8 feet. Using the standard 4-to-1 ladder angle rule, this setup is:", opts:["Correctly positioned per the 4-to-1 rule","Too steep — the base should be roughly 2 feet from the wall for an 8-foot working height (1 foot of base offset per 4 feet of height)","Irrelevant, since ladder angle rules don't exist","Only a concern above 20 feet"], correct:1, explain:"The 4-to-1 rule means the base should sit about 1 foot away from the vertical surface for every 4 feet of height to that surface — at 8 feet, the base should be about 2 feet out, not 1."},
+  {topic:"Safety", q:"A trench box (shield) used during excavation work is meant to:", opts:["Prevent cave-ins from crushing workers inside the protected zone, rather than necessarily preventing the trench walls from moving at all","Replace the need for any other safety precautions on site","Only be used in trenches shallower than 3 feet","Eliminate the need for atmospheric testing"], correct:0, explain:"Trench shields protect workers inside them from a cave-in's force; they don't necessarily prevent soil movement itself, which is why other protective methods like sloping/benching may still apply elsewhere."},
+  {topic:"Safety", q:"A jobsite safety program requires 'toolbox talks.' These are best described as:", opts:["Formal annual safety certifications","Brief, regular safety discussions with crews focused on specific, relevant hazards for that day's or week's work","A one-time orientation given only to new hires","Paperwork with no real value beyond compliance"], correct:1, explain:"Toolbox talks are short, frequent safety discussions targeting hazards relevant to the current work, reinforcing awareness on an ongoing basis rather than a one-time event."},
+  {topic:"Safety", q:"OSHA's 'Focus Four' hazards in construction, responsible for the majority of construction fatalities, include falls, electrocution, struck-by, and:", opts:["Chemical exposure","Caught-in/between hazards","Noise-induced hearing loss","Repetitive motion injury"], correct:1, explain:"OSHA's Focus Four construction hazards are falls, struck-by, electrocution, and caught-in/between hazards — together responsible for the majority of construction worker fatalities."},
+  {topic:"Safety", q:"A workplace fatality occurs on a jobsite. Under OSHA reporting requirements, the employer must report it to OSHA within:", opts:["30 days","24 hours","8 hours","72 hours"], correct:2, explain:"OSHA requires employers to report a work-related fatality within 8 hours of learning about it."},
+  {topic:"Safety", q:"A worker suffers an in-patient hospitalization, amputation, or loss of an eye on the job. OSHA requires this be reported within:", opts:["8 hours","24 hours","7 days","No reporting requirement unless it's a fatality"], correct:1, explain:"In-patient hospitalizations, amputations, and losses of an eye must be reported to OSHA within 24 hours, a separate and longer window than the 8-hour fatality reporting rule."},
+  {topic:"Safety", q:"Under OSHA recordkeeping rules, employers with how many or fewer employees are generally exempt from routinely maintaining injury and illness logs (with some industry exceptions)?", opts:["5 or fewer","10 or fewer","25 or fewer","50 or fewer"], correct:1, explain:"Employers with 10 or fewer employees at all times during the prior calendar year are generally exempt from routine OSHA injury/illness recordkeeping, subject to certain industry exceptions."},
+  {topic:"Safety", q:"OSHA-required injury and illness records (such as the OSHA 300 log) must generally be retained for how long?", opts:["1 year","3 years","5 years","10 years"], correct:2, explain:"OSHA generally requires injury and illness records to be retained for 5 years following the end of the calendar year they cover."},
+  {topic:"Safety", q:"After receiving an OSHA citation, an employer must generally post the citation at or near the location of the violation for how long?", opts:["24 hours only","3 working days or until the violation is corrected, whichever is longer","30 calendar days regardless of correction status","There is no posting requirement"], correct:1, explain:"OSHA generally requires citations to remain posted for 3 working days or until the violation is corrected, whichever period is longer."},
+
+  {topic:"Safety", q:"OSHA's general Lockout/Tagout standard (1910.147) primarily governs general industry. For CONSTRUCTION work involving hazardous energy control, the applicable requirements instead generally come from:", opts:["1910.147 applies identically and exclusively to construction too, with no separate standard", "Construction-specific standards under 29 CFR 1926 — assuming 1910.147 automatically covers a construction jobsite is a common and meaningful error", "No lockout/tagout requirements apply to construction work at all","Only state OSHA plans address lockout/tagout on construction sites"], correct:1, explain:"General industry's 1910.147 LOTO standard doesn't directly govern most construction activity; construction has its own hazardous-energy-control provisions under 29 CFR 1926 — treating 1910.147 as automatically applicable to a job site is a genuine and common misconception."},
+  {topic:"Safety", q:"A concrete-cutting task using a handheld grinder is listed on OSHA's respirable crystalline silica 'Table 1.' Following Table 1's specified engineering controls and work practices for that task generally:", opts:["Has no bearing on compliance obligations", "Satisfies the exposure control requirements for that task without needing separate air monitoring — but only if the specific listed controls (like water delivery or a shroud with vacuum) are actually and fully followed as described", "Is optional guidance with no compliance value","Only applies to concrete plants, not jobsite cutting"], correct:1, explain:"Table 1 offers a compliance shortcut — following its specified controls for a listed task satisfies silica exposure requirements without separate exposure monitoring, but ONLY if implemented exactly as specified; partial or modified implementation doesn't qualify for that shortcut."},
+
+  // TAX LAWS (8) — weak
+  {topic:"Tax Laws", q:"In Utah, sales/use tax generally applies to a contractor's:", opts:["Labor charges only, never materials","Purchase of materials and supplies used in construction, in most cases","Nothing — contractors are fully tax-exempt","Only jobs over $1 million"], correct:1, explain:"Contractors generally owe sales/use tax on materials and supplies they purchase and consume in construction work."},
+  {topic:"Tax Laws", q:"A business that pays an independent contractor $600 or more in a year typically must issue what tax form?", opts:["W-2","1099-NEC","I-9","W-4"], correct:1, explain:"Form 1099-NEC reports nonemployee compensation of $600 or more paid to independent contractors during the year."},
+  {topic:"Tax Laws", q:"A W-2 form is used to report wages for which type of worker?", opts:["Independent contractors","Employees, along with tax withholdings","Business partners","Unpaid volunteers"], correct:1, explain:"W-2 forms report employee wages and the taxes withheld from them, distinct from 1099 forms used for independent contractors."},
+  {topic:"Tax Laws", q:"Self-employed contractors who expect to owe tax are generally required to pay taxes:", opts:["Only once a year, in April","Quarterly, as estimated tax payments","Never, if income is under $100,000","Only if audited"], correct:1, explain:"Self-employed individuals typically must make quarterly estimated tax payments rather than paying everything at year-end."},
+  {topic:"Tax Laws", q:"An Employer Identification Number (EIN) is primarily used to:", opts:["Identify a business for federal tax purposes, similar to an SSN for individuals","Register a vehicle for business use","Replace the need for a contractor license","Track employee attendance"], correct:0, explain:"An EIN is a federal tax ID number the IRS assigns to identify a business entity, used for filing taxes and payroll reporting."},
+  {topic:"Tax Laws", q:"Employer payroll tax obligations for a contractor with employees typically include withholding and remitting:", opts:["Only state sales tax","Federal income tax withholding, Social Security, and Medicare (FICA) taxes","Only property tax","No taxes if paid in cash"], correct:1, explain:"Employers must withhold federal income tax and FICA (Social Security/Medicare) from employee wages and remit them, along with employer-matched portions."},
+  {topic:"Tax Laws", q:"A resale certificate allows a contractor to:", opts:["Avoid ever paying any tax on the business","Purchase certain materials tax-exempt when they will be resold or incorporated into a taxable sale, per state rules","Skip filing an annual tax return","Deduct personal expenses as business costs"], correct:1, explain:"Resale certificates let qualifying purchases be made without sales tax when the item will be resold or otherwise taxed downstream, per state rules."},
+  {topic:"Tax Laws", q:"Deductible business expenses for a contractor commonly include:", opts:["Personal vacation costs unrelated to the business","Ordinary and necessary costs of running the business, like tools, vehicle use, and insurance premiums","The owner's personal mortgage payment","Fines and penalties for code violations"], correct:1, explain:"The IRS generally allows deduction of ordinary and necessary business expenses; personal costs, fines, and penalties are not deductible."},
+  {topic:"Tax Laws", q:"A contractor misclassifies several employees as 1099 independent contractors to avoid payroll tax. If discovered in an audit, the business is generally exposed to:", opts:["No consequences if the workers agreed to the arrangement","Back payroll taxes, interest, and penalties for the misclassified period, potentially for multiple years","A simple warning letter with no financial impact","Automatic license revocation only, no tax exposure"], correct:1, explain:"Misclassification discovered on audit typically triggers back payroll tax liability, interest, and penalties, which can compound significantly across multiple tax years."},
+  {topic:"Tax Laws", q:"A contractor purchases a truck used 70% for business and 30% for personal errands. For tax purposes, the deductible portion of related vehicle expenses is generally:", opts:["100%, since it's titled to the business","Limited to the business-use percentage (roughly 70% in this case), not the full cost","0%, since any personal use disqualifies the entire deduction","Determined solely by the truck's purchase price"], correct:1, explain:"Mixed-use vehicle expenses are generally deductible only in proportion to actual business use, requiring reasonable recordkeeping (e.g., a mileage log) to support the split."},
+  {topic:"Tax Laws", q:"A contractor accepts a large cash payment for a job and doesn't report it as income. Beyond ethical concerns, this creates exposure to:", opts:["No real risk if it's under $10,000","Tax evasion penalties, interest, and potential criminal exposure if discovered, regardless of the payment method","A simple late-filing fee only","Nothing, since cash transactions aren't taxable"], correct:1, explain:"All income is taxable regardless of payment form; failing to report cash income creates the same (or greater) audit and penalty exposure as any other unreported income."},
+  {topic:"Tax Laws", q:"A Section 179 deduction allows a business to:", opts:["Avoid ever paying sales tax on equipment","Potentially deduct the full purchase price of qualifying equipment/tools in the year purchased, rather than depreciating it over several years","Skip filing a tax return entirely for that year","Exempt all business vehicles from registration fees"], correct:1, explain:"Section 179 allows eligible businesses to expense the full cost of qualifying equipment purchases immediately, rather than spreading the deduction out through standard depreciation schedules."},
+  {topic:"Tax Laws", q:"A contractor operating as an LLC taxed as a sole proprietorship generally owes self-employment tax on:", opts:["Nothing, since LLCs are tax-exempt","Net self-employment earnings, covering the individual's share of Social Security and Medicare that an employer would otherwise split with an employee","Only gross revenue before any expenses","Only income above $1,000,000"], correct:1, explain:"Self-employed individuals owe self-employment tax on net earnings, covering both the employee and employer portions of Social Security/Medicare that a traditional employer would otherwise split."},
+  {topic:"Tax Laws", q:"A contractor fails to remit collected sales tax to the state on time. Compared to failing to pay income tax, sales tax non-remittance is often treated by tax authorities as:", opts:["Identical in severity, no distinction exists","Potentially more serious, since sales tax collected from customers is treated as funds held in trust for the state, not the contractor's own money","Less serious, since sales tax is optional to remit","Irrelevant if the contractor eventually goes out of business"], correct:1, explain:"Collected sales tax is generally treated as trust fund money owed to the state; failing to remit it can carry more severe personal liability exposure than ordinary income tax delinquency."},
+  {topic:"Tax Laws", q:"The self-employment tax rate on net self-employment earnings is approximately:", opts:["7.65%","15.3%","22%","35%"], correct:1, explain:"Self-employment tax is roughly 15.3% of net earnings — 12.4% for Social Security plus 2.9% for Medicare, covering both the 'employee' and 'employer' shares a traditional payroll arrangement would split.", commonlyMissed:true},
+  {topic:"Tax Laws", q:"Form W-9 is used to:", opts:["Report an employee's annual wages and withholding","Collect a contractor's/vendor's taxpayer ID information before the payer issues a 1099", "Apply for an EIN directly with the IRS","Report quarterly payroll tax deposits"], correct:1, explain:"A business collects Form W-9 from independent contractors/vendors to get their taxpayer ID number, which is then used to prepare an accurate Form 1099 at year-end.", commonlyMissed:true},
+  {topic:"Tax Laws", q:"If a contractor fails to provide a valid taxpayer ID on Form W-9, the payer may be required to withhold what's known as 'backup withholding' from payments at a rate of approximately:", opts:["10%","24%","33%","50%"], correct:1, explain:"Backup withholding is currently around 24% of the payment when a payee fails to furnish a valid taxpayer ID, and the payer must remit it to the IRS.", commonlyMissed:true},
+  {topic:"Tax Laws", q:"Form 941 is filed by employers to report:", opts:["Annual business income tax","Quarterly federal payroll taxes withheld from employees, plus the employer's matching share","Sales tax collected from customers","A one-time new-hire notification"], correct:1, explain:"Form 941 is the employer's quarterly federal tax return reporting withheld income tax plus Social Security/Medicare taxes for both employee and employer portions.", commonlyMissed:true},
+  {topic:"Tax Laws", q:"The 'trust fund recovery penalty' can make a responsible individual (like a business owner) personally liable for what portion of unpaid withheld payroll taxes?", opts:["10%","50%","Up to 100%","There is no personal liability, only the business entity is liable"], correct:2, explain:"The trust fund recovery penalty can impose personal liability of up to 100% of unpaid withheld payroll taxes on responsible individuals, piercing the usual entity liability shield for this specific obligation.", commonlyMissed:true},
+  {topic:"Tax Laws", q:"Self-employed individuals who expect to owe at least a certain amount in tax are generally required to make estimated tax payments on approximately what schedule?", opts:["Once a year, at filing time only","Roughly four times a year — around mid-April, mid-June, mid-September, and mid-January of the following year","Monthly, on the 1st of every month","Only if audited by the IRS"], correct:1, explain:"Estimated tax payments are generally due in four installments spread across the year, spaced roughly every quarter, rather than in one lump sum at filing."},
+  {topic:"Tax Laws", q:"Since the 2020 tax year, nonemployee compensation paid to independent contractors is reported on which form — a change from the older practice of using a different form's box for this?", opts:["1099-MISC, as it always has been","1099-NEC — nonemployee compensation was moved OFF the 1099-MISC and onto its own dedicated form starting with the 2020 tax year, a change that trips up anyone recalling older rules", "W-2, same as employees","There is no dedicated reporting form for this"], correct:1, explain:"Starting with tax year 2020, the IRS revived Form 1099-NEC specifically for nonemployee compensation, which had previously been reported in a box on Form 1099-MISC — outdated study material or memory can lead people to answer 1099-MISC incorrectly.", commonlyMissed:true},
+  {topic:"Tax Laws", q:"A contractor uses one room in their home exclusively and regularly as a dedicated office for business administration, and wants to claim a home office deduction. If that same room is ALSO used regularly for personal family activities in the evenings, the deduction is:", opts:["Still fully allowed, since business use occurs at some point","Generally disqualified for that space, since the 'exclusive use' test requires the area be used ONLY for business — regular personal use of the same space breaks that requirement even if business use also occurs", "Allowed at a reduced 50% rate automatically","Only a concern if the IRS specifically asks about it"], correct:1, explain:"The home office deduction's exclusive-use test is strict — regular personal use of the same physical space generally disqualifies it entirely, regardless of how much legitimate business use also happens there.", commonlyMissed:true}
+];
+
+const ALL_TOPICS = Object.keys(LAST_SCORE);
+// Exact per-topic question counts as they appear on the real 60-question Utah exam,
+// taken directly from Fernando's actual Prov score report "# Possible" column.
+const EXAM_BLUEPRINT = {};
+ALL_TOPICS.forEach(t => { EXAM_BLUEPRINT[t] = LAST_SCORE[t].total; });
+const EXAM_TOTAL_QUESTIONS = Object.values(EXAM_BLUEPRINT).reduce((a,b)=>a+b,0); // 60
+const EXAM_TIME_LIMIT_SECONDS = 120 * 60; // 120 minutes, matching the real exam
+const WEAK_TOPICS = ALL_TOPICS.filter(isWeak);
+
+let state = {screen:"intro", idx:0, answers:[], mode:"weak", source:"bank"};
+let activeQuestions = [];
+let attemptHistory = [];
+const STORAGE_KEY = "ut_b100_attempts_v1";
+const SEEN_KEY = "ut_b100_seen_ids_v1";
+
+// ---------- localStorage-based history (works on any deployed site) ----------
+function loadHistory(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    attemptHistory = raw ? JSON.parse(raw) : [];
+  } catch(e){
+    attemptHistory = [];
+  }
+}
+function saveAttempt(record){
+  attemptHistory.unshift(record);
+  if(attemptHistory.length > 40) attemptHistory = attemptHistory.slice(0,40);
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(attemptHistory)); } catch(e){ console.error(e); }
+}
+function getSeenIds(){
+  try{
+    const raw = localStorage.getItem(SEEN_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch(e){ return []; }
+}
+function markSeen(ids){
+  try{
+    let seen = getSeenIds();
+    seen = seen.concat(ids);
+    if(seen.length > 200) seen = seen.slice(seen.length-200);
+    localStorage.setItem(SEEN_KEY, JSON.stringify(seen));
+  } catch(e){}
+}
+
+// assign a stable id to each question (topic + question text)
+QUESTIONS.forEach(q => { q._id = q.topic + "::" + q.q; });
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+// Build a fresh random set: prefer unseen questions first, shuffle answer order too
+// countSpec: either a flat number (same count per topic) or an object {topicName: count}
+function buildRandomSet(topics, countSpec){
+  const seen = getSeenIds();
+  let picked = [];
+  topics.forEach(topic => {
+    const wantCount = (typeof countSpec === 'object') ? (countSpec[topic] || 0) : countSpec;
+    if(wantCount <= 0) return;
+    let pool = QUESTIONS.filter(q => q.topic === topic);
+    let unseen = pool.filter(q => !seen.includes(q._id));
+    let usePool = unseen.length > 0 ? unseen : pool; // reset once exhausted
+    usePool = shuffle(usePool);
+    const n = Math.min(wantCount, usePool.length);
+    picked = picked.concat(usePool.slice(0,n));
+  });
+  picked = shuffle(picked);
+  // shuffle each question's option order independently
+  const finalSet = picked.map(q => {
+    const order = shuffle([0,1,2,3]);
+    const newOpts = order.map(i => q.opts[i]);
+    const newCorrect = order.indexOf(q.correct);
+    return {topic:q.topic, q:q.q, opts:newOpts, correct:newCorrect, explain:q.explain, _id:q._id};
+  });
+  markSeen(finalSet.map(q => q._id));
+  return finalSet;
+}
+
+function buildActiveSet(mode){
+  if(mode === "sim"){
+    activeQuestions = buildRandomSet(ALL_TOPICS, EXAM_BLUEPRINT);
+    return;
+  }
+  if(mode === "missed"){
+    activeQuestions = buildCommonlyMissedSet();
+    return;
+  }
+  const topics = mode === "weak" ? WEAK_TOPICS : ALL_TOPICS;
+  const perTopic = mode === "weak" ? 6 : 4;
+  activeQuestions = buildRandomSet(topics, perTopic);
+}
+
+// Pulls only from questions tagged commonlyMissed:true — the specific clusters
+// research + Fernando's own missed questions point to: lien deadline mechanics,
+// margin/markup business math, business org liability edge cases, payroll/tax
+// specifics, and contract clause conflicts. Not grouped by topic, since the whole
+// point is these span multiple topics.
+function buildCommonlyMissedSet(){
+  const seen = getSeenIds();
+  let pool = QUESTIONS.filter(q => q.commonlyMissed);
+  let unseen = pool.filter(q => !seen.includes(q._id));
+  let usePool = unseen.length > 0 ? unseen : pool;
+  usePool = shuffle(usePool);
+  const finalSet = usePool.map(q => {
+    const order = shuffle([0,1,2,3]);
+    const newOpts = order.map(i => q.opts[i]);
+    const newCorrect = order.indexOf(q.correct);
+    return {topic:q.topic, q:q.q, opts:newOpts, correct:newCorrect, explain:q.explain, _id:q._id};
+  });
+  markSeen(finalSet.map(q => q._id));
+  return finalSet;
+}
+
+function render(){
+  const app = document.getElementById('app');
+  if(state.screen === 'intro') app.innerHTML = renderIntro();
+  else if(state.screen === 'quiz') app.innerHTML = renderQuiz();
+  else app.innerHTML = renderResults();
+}
+
+function renderIntro(){
+  let bars = ALL_TOPICS.map(name => {
+    const s = LAST_SCORE[name];
+    const pct = Math.round((s.correct/s.total)*100);
+    const weak = isWeak(name);
+    return `
+    <div class="breakdown-row">
+      <div class="breakdown-label ${weak?'weak':''}">${name}</div>
+      <div class="bar-track"><div class="bar-fill ${weak?'weak':''}" style="width:${pct}%"></div></div>
+      <div class="breakdown-pct">${s.correct}/${s.total}</div>
+    </div>`;
+  }).join('');
+
+  let historyBlock;
+  if(attemptHistory.length === 0){
+    historyBlock = `<div class="empty-note">No practice attempts logged yet on this device. Finish a set below and it'll show up here.</div>`;
+  } else {
+    historyBlock = attemptHistory.slice(0,8).map(a => {
+      const d = new Date(a.date);
+      const dateStr = (d.getMonth()+1) + "/" + d.getDate() + "/" + d.getFullYear();
+      const passed = a.scorePct >= 70;
+      const modeLabel = a.mode === 'weak' ? 'Weak areas' : a.mode === 'sim' ? 'Simulated exam' : a.mode === 'missed' ? 'Commonly missed' : 'Full exam';
+      return `<div class="history-row">
+        <span class="history-meta">${dateStr} · ${modeLabel} · ${a.total} Q</span>
+        <span class="history-score ${passed?'pass':'fail'}">${a.scorePct}%</span>
+      </div>`;
+    }).join('');
+  }
+
+  return `
+    <header class="top">
+      <div class="eyebrow">Retake Prep — Built From Your Actual Score Report</div>
+      <h1>B100 Business &amp; Law<br>Practice Exam</h1>
+      <div class="sub">Your 03/20/2026 attempt scored 48% (needed 70%). Weakest areas: Safety, Business Organization, Contract Management, and Lien Laws.</div>
+      <span class="blueprint-badge">70% TO PASS</span>
+      <span class="blueprint-badge weak">${QUESTIONS.filter(q=>isWeak(q.topic)).length} WEAK-AREA QUESTIONS IN BANK</span>
+    </header>
+    <div class="panel">
+      <div class="eyebrow" style="margin-bottom:12px;">Your last attempt, by subject</div>
+      ${bars}
+    </div>
+    <div class="panel">
+      <div class="eyebrow" style="margin-bottom:10px;">Practice history (this device)</div>
+      ${historyBlock}
+    </div>
+    <div class="panel">
+      <div class="eyebrow" style="margin-bottom:10px;">Choose scope</div>
+      <div class="mode-row">
+        <div class="mode-btn ${state.mode==='weak'?'active':''}" onclick="setMode('weak')">Weak Areas Only</div>
+        <div class="mode-btn ${state.mode==='all'?'active':''}" onclick="setMode('all')">Full Exam</div>
+        <div class="mode-btn ${state.mode==='sim'?'active':''}" onclick="setMode('sim')">Simulated Exam</div>
+        <div class="mode-btn ${state.mode==='missed'?'active':''}" onclick="setMode('missed')">Commonly Missed</div>
+      </div>
+      <div class="sub" style="margin-top:8px;">${
+        state.mode==='weak' ? "Drills only Safety, Business Organization, Contract Management, and Lien Laws — the sections that sank your last score." :
+        state.mode==='sim' ? `Matches the real test exactly: ${EXAM_TOTAL_QUESTIONS} questions sized per-topic just like your actual score report (10 Licensing, 6 Contract Mgmt, 4 Business Org, etc.), with a live 120-minute countdown.` :
+        state.mode==='missed' ? `Pulls only the ${QUESTIONS.filter(q=>q.commonlyMissed).length} questions matching the clusters test-takers most often get wrong: lien deadline mechanics, margin-vs-markup math, business org liability edge cases, payroll/tax specifics, and contract clause conflicts — spans multiple subject areas by design.` :
+        "Covers all 11 subject areas, including the ones you already did well on, to confirm they've stuck."
+      }</div>
+    </div>
+    <button class="primary" onclick="startQuiz()">${state.mode==='sim' ? 'Start Full Simulated Exam (120 min) →' : state.mode==='missed' ? 'Drill Commonly Missed →' : 'Shuffle a New Set →'}</button>
+    <footer>Every set pulls a fresh random mix from a ${QUESTIONS.length}-question bank (including harder scenario and calculation questions) with shuffled answer order. Study aid only — verify current rules with DOPL / your Prov candidate handbook.</footer>
+  `;
+}
+
+function setMode(m){
+  state.mode = m;
+  render();
+}
+
+let timerInterval = null;
+
+function startQuiz(){
+  buildActiveSet(state.mode);
+  state.source = "bank";
+  state.screen = "quiz";
+  state.idx = 0;
+  state.answers = new Array(activeQuestions.length).fill(null);
+  state.timeUp = false;
+  if(state.mode === "sim"){
+    state.deadline = Date.now() + EXAM_TIME_LIMIT_SECONDS * 1000;
+    if(timerInterval) clearInterval(timerInterval);
+    timerInterval = setInterval(tickTimer, 1000);
+  } else {
+    state.deadline = null;
+    if(timerInterval) clearInterval(timerInterval);
+  }
+  render();
+}
+
+function tickTimer(){
+  if(state.screen !== 'quiz' || !state.deadline) return;
+  const remaining = state.deadline - Date.now();
+  if(remaining <= 0){
+    clearInterval(timerInterval);
+    state.timeUp = true;
+    finishAttempt();
+    state.screen = "results";
+    render();
+    return;
+  }
+  // only re-render the timer chip to avoid disrupting the current question view
+  const el = document.getElementById('exam-timer');
+  if(el) el.textContent = formatTime(remaining);
+}
+
+function formatTime(ms){
+  const totalSec = Math.max(0, Math.floor(ms/1000));
+  const m = Math.floor(totalSec/60);
+  const s = totalSec % 60;
+  return m + ":" + (s < 10 ? "0"+s : s);
+}
+
+function renderQuiz(){
+  const q = activeQuestions[state.idx];
+  const answered = state.answers[state.idx] !== null;
+  const pct = Math.round((state.idx/activeQuestions.length)*100);
+  const weak = isWeak(q.topic);
+
+  let opts = q.opts.map((opt, i) => {
+    let cls = "opt";
+    let disabledAttr = answered ? "disabled" : "";
+    if(answered){
+      if(i === q.correct) cls += " correct";
+      else if(i === state.answers[state.idx] && i !== q.correct) cls += " incorrect";
+    }
+    return `<button class="${cls}" ${disabledAttr} onclick="selectAnswer(${i})">
+      <span class="letter">${String.fromCharCode(65+i)}</span><span>${opt}</span>
+    </button>`;
+  }).join('');
+
+  let explainBlock = answered ? `<div class="explain"><b>${state.answers[state.idx] === q.correct ? "Correct." : "Not quite."}</b> ${q.explain}</div>` : '';
+
+  let navButtons = `<div class="nav-row">`;
+  if(answered){
+    navButtons += `<button class="primary" onclick="nextQuestion()">${state.idx === activeQuestions.length-1 ? "See Results →" : "Next Question →"}</button>`;
+  }
+  navButtons += `</div>`;
+
+  return `
+    <div class="progress-row">
+      <span>QUESTION ${state.idx+1} / ${activeQuestions.length}</span>
+      ${state.mode === 'sim' && state.deadline ? `<span id="exam-timer" style="color:var(--amber);font-weight:600;">${formatTime(state.deadline - Date.now())}</span>` : `<span>${pct}% THROUGH</span>`}
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+    <span class="topic-tag ${weak?'weak':''}">${q.topic}${weak?' · weak spot':''}</span>
+    <div class="question-card">
+      <p class="q-text">${q.q}</p>
+      ${opts}
+      ${explainBlock}
+    </div>
+    ${navButtons}
+  `;
+}
+
+function selectAnswer(i){
+  if(state.answers[state.idx] !== null) return;
+  state.answers[state.idx] = i;
+  render();
+}
+
+function nextQuestion(){
+  if(state.idx === activeQuestions.length-1){
+    if(timerInterval) clearInterval(timerInterval);
+    finishAttempt();
+    state.screen = "results";
+  } else {
+    state.idx += 1;
+  }
+  render();
+}
+
+function finishAttempt(){
+  let correctCount = 0;
+  let topicStats = {};
+  activeQuestions.forEach((q,i) => {
+    if(!topicStats[q.topic]) topicStats[q.topic] = {correct:0,total:0};
+    topicStats[q.topic].total += 1;
+    if(state.answers[i] === q.correct){
+      correctCount += 1;
+      topicStats[q.topic].correct += 1;
+    }
+  });
+  const scorePct = Math.round((correctCount/activeQuestions.length)*100);
+  saveAttempt({
+    date: new Date().toISOString(),
+    mode: state.mode,
+    scorePct: scorePct,
+    correct: correctCount,
+    total: activeQuestions.length,
+    topics: topicStats
+  });
+}
+
+function renderResults(){
+  let correctCount = 0;
+  let topicStats = {};
+  activeQuestions.forEach((q,i) => {
+    if(!topicStats[q.topic]) topicStats[q.topic] = {correct:0,total:0};
+    topicStats[q.topic].total += 1;
+    if(state.answers[i] === q.correct){
+      correctCount += 1;
+      topicStats[q.topic].correct += 1;
+    }
+  });
+  const scorePct = Math.round((correctCount/activeQuestions.length)*100);
+  const passed = scorePct >= 70;
+
+  let topicRows = Object.keys(topicStats).map(name => {
+    let s = topicStats[name];
+    let weak = isWeak(name);
+    return `<div class="topic-result-row ${weak?'weak':''}"><span>${name}</span><span class="topic-score">${s.correct}/${s.total}</span></div>`;
+  }).join('');
+
+  const modeLabel = state.mode === 'weak' ? 'Weak-Area Drill' : state.mode === 'sim' ? 'Full Simulated Exam' : state.mode === 'missed' ? 'Commonly Missed Drill' : 'Full Exam';
+  let timeUpNotice = state.timeUp ? `<div class="error-box">Time's up — this matches what happens on the real exam if the 120-minute clock runs out. Unanswered questions were scored as incorrect.</div>` : '';
+
+  return `
+    <header class="top">
+      <div class="eyebrow">Results — ${modeLabel}</div>
+      <h1>Practice Complete</h1>
+    </header>
+    ${timeUpNotice}
+    <div class="panel">
+      <div class="score-hero">
+        <div class="score-num ${passed ? 'pass':'fail'}">${scorePct}%</div>
+        <div class="score-label">${correctCount} of ${activeQuestions.length} correct — ${passed ? 'passing (70% needed)' : 'below 70% passing mark'}</div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="eyebrow" style="margin-bottom:8px;">By topic</div>
+      ${topicRows}
+    </div>
+    <button class="ghost" onclick="reviewMissed()">Review Missed Questions</button>
+    <button class="secondary" onclick="startQuiz()">Shuffle Another New Set (same scope) →</button>
+    <button class="primary" onclick="backToIntro()">Back to Start</button>
+    <footer>Study aid only — verify current rules with DOPL / your Prov candidate handbook.</footer>
+  `;
+}
+
+function backToIntro(){
+  if(timerInterval) clearInterval(timerInterval);
+  state.screen = "intro";
+  render();
+}
+
+function reviewMissed(){
+  const app = document.getElementById('app');
+  let missed = activeQuestions.map((q,i) => ({q,i})).filter(item => state.answers[item.i] !== item.q.correct);
+  let html = `
+    <header class="top">
+      <div class="eyebrow">Review</div>
+      <h1>Missed Questions</h1>
+      <div class="sub">${missed.length === 0 ? "You didn't miss any — nice work." : missed.length + " question(s) to revisit."}</div>
+    </header>
+  `;
+  missed.forEach(item => {
+    let q = item.q;
+    let yourAns = state.answers[item.i];
+    let weak = isWeak(q.topic);
+    html += `
+      <div class="question-card" style="margin-bottom:14px;">
+        <span class="topic-tag ${weak?'weak':''}">${q.topic}</span>
+        <p class="q-text">${q.q}</p>
+        ${q.opts.map((opt,i) => {
+          let cls = "opt";
+          if(i === q.correct) cls += " correct";
+          else if(i === yourAns) cls += " incorrect";
+          return `<div class="${cls}"><span class="letter">${String.fromCharCode(65+i)}</span><span>${opt}</span></div>`;
+        }).join('')}
+        <div class="explain"><b>Why:</b> ${q.explain}</div>
+      </div>
+    `;
+  });
+  html += `<button class="primary" onclick="backToIntro()">Back to Start</button>`;
+  app.innerHTML = html;
+}
+
+loadHistory();
+render();
+</script>
+</body>
+</html>
