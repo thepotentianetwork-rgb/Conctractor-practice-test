@@ -107,25 +107,60 @@
 <div class="wrap" id="app"></div>
 
 <script>
-// Fernando's actual 03/20/2026 Prov score report — used to flag weak subject areas
-const LAST_SCORE = {
-  "Business Organization": {correct:1, total:4},
-  "Contract Management": {correct:1, total:6},
-  "Estimating and Bidding": {correct:4, total:6},
-  "Financial Management": {correct:4, total:6},
-  "Labor Laws": {correct:3, total:6},
-  "Licensing": {correct:5, total:10},
-  "Lien Laws": {correct:1, total:3},
-  "Project Management": {correct:5, total:5},
-  "Risk Management": {correct:3, total:5},
-  "Safety": {correct:0, total:4},
-  "Tax Laws": {correct:2, total:5}
-};
+// Nando's official Prov score reports — most recent first.
+// LAST_SCORE and weak-area mode use the latest report; earlier official attempts stay in SCORE_REPORTS for history.
+const SCORE_REPORTS = [
+  {
+    date: "07/29/2026",
+    scores: {
+      "Business Organization": {correct:4, total:4},
+      "Contract Management": {correct:5, total:6},
+      "Estimating and Bidding": {correct:3, total:6},
+      "Financial Management": {correct:5, total:6},
+      "Labor Laws": {correct:3, total:6},
+      "Licensing": {correct:6, total:10},
+      "Lien Laws": {correct:2, total:3},
+      "Project Management": {correct:2, total:5},
+      "Risk Management": {correct:3, total:5},
+      "Safety": {correct:2, total:4},
+      "Tax Laws": {correct:2, total:5}
+    }
+  },
+  {
+    date: "03/20/2026",
+    scores: {
+      "Business Organization": {correct:1, total:4},
+      "Contract Management": {correct:1, total:6},
+      "Estimating and Bidding": {correct:4, total:6},
+      "Financial Management": {correct:4, total:6},
+      "Labor Laws": {correct:3, total:6},
+      "Licensing": {correct:5, total:10},
+      "Lien Laws": {correct:1, total:3},
+      "Project Management": {correct:5, total:5},
+      "Risk Management": {correct:3, total:5},
+      "Safety": {correct:0, total:4},
+      "Tax Laws": {correct:2, total:5}
+    }
+  }
+];
+const LATEST_REPORT = SCORE_REPORTS[0];
+const LAST_SCORE = LATEST_REPORT.scores;
 const WEAK_THRESHOLD = 0.5;
 function isWeak(topic){
   const s = LAST_SCORE[topic];
   if(!s) return false;
   return (s.correct/s.total) < WEAK_THRESHOLD;
+}
+function reportTotals(scores){
+  let correct = 0, total = 0;
+  Object.values(scores).forEach(s => { correct += s.correct; total += s.total; });
+  return {correct, total, pct: Math.round((correct/total)*100)};
+}
+function formatTopicList(topics){
+  if(!topics || topics.length === 0) return "none under the 50% cutoff";
+  if(topics.length === 1) return topics[0];
+  if(topics.length === 2) return topics[0] + " and " + topics[1];
+  return topics.slice(0, -1).join(", ") + ", and " + topics[topics.length - 1];
 }
 
 // Expanded question bank — each topic has more questions than any single quiz uses,
@@ -332,6 +367,38 @@ const QUESTIONS = [
   {topic:"Tax Laws", q:"Form W-4 is used to:", opts:["Let an employee tell the employer how to calculate federal income tax withholding from wages","Report an independent contractor's annual nonemployee compensation","Apply for an Employer Identification Number","File the employer's annual FUTA return"], correct:0, explain:"An employee completes Form W-4 so the employer can calculate federal income tax withholding from wages. It is not the year-end wage statement (W-2), the independent-contractor reporting form (1099-NEC), or the FUTA return (940).", commonlyMissed:true},
   {topic:"Tax Laws", q:"In addition to the 2.9% Medicare portion of self-employment or FICA tax, an additional Medicare tax of 0.9% generally applies to earnings above a statutory threshold. That additional 0.9% is:", opts:["Split equally by a 0.45% employer match","Paid only by the employee or self-employed individual; there is no employer match","Paid only by the employer","Repealed and no longer in effect"], correct:1, explain:"The Additional Medicare Tax of 0.9% under the Internal Revenue Code applies to wages or self-employment income above the statutory threshold and is not matched by an employer. That is separate from the base 1.45% employee / 1.45% employer Medicare tax (or the 2.9% Medicare portion of self-employment tax).", commonlyMissed:true},
 
+  {topic:"Licensing", q:"An R100 residential and small commercial contractor may perform commercial construction of no more than:", opts:["Two stories above ground and 10,000 square feet","Three stories above ground and 20,000 square feet","Four stories above ground and 30,000 square feet","Five stories above ground with no square-footage limit"], correct:1, explain:"Utah Code §58-55-102(42) (effective 10/1/2026; repealed 1/1/2027) defines a residential and small commercial contractor as qualified to perform or superintend single-family residences, multifamily residences up to four units, and commercial construction of not more than three stories above ground and not more than 20,000 square feet (with the usual plumbing, electrical, mechanical, and manufactured-housing exceptions). Utah Admin. Code R156-55a-301h ties the R100 scope to that definition. A B100 general building contractor is not limited to those commercial size caps."},
+  {topic:"Licensing", q:"Failure to notify the Division of a change in qualifier is:", opts:["Only a late-renewal fee issue","Automatically a class A felony","Grounds for immediate suspension of the license","Allowed if the business owners stay the same"], correct:2, explain:"Utah Code §58-55-503(4)(b) (effective 5/1/2024; superseded 1/1/2027) lists failure to notify the division concerning a change in qualifier, or loss of insurance coverage, as grounds for immediate suspension. Utah Admin. Code R156-55a-501(1) (current compiled rule effective 8/7/2026) likewise treats failure to notify the Division of a qualifier change as unprofessional conduct and as grounds for immediate suspension."},
+  {topic:"Licensing", q:"A contractor must notify the Division of a change in the qualifier's or owners' name, address, phone number, or email within:", opts:["5 days","30 days","90 days","10 days"], correct:3, explain:"Utah Admin. Code R156-55a-501(2) (current compiled rule effective 8/7/2026) makes it unprofessional conduct to fail to notify the Division within 10 days of any change of the name, address, phone number, or email address of the qualifier or owners of a licensee."},
+  {topic:"Licensing", q:"Performing construction-trades work without a required license is generally:", opts:["A class A misdemeanor","A class C misdemeanor only","A second-degree felony on the first offense","Lawful if the contract is under $50,000"], correct:0, explain:"Utah Code §58-55-501 makes unlicensed practice unlawful. §58-55-503(2)(a) (effective 5/1/2024; superseded 1/1/2027) provides that a person who violates §58-55-501(1) and listed related provisions is guilty of a class A misdemeanor."},
+  {topic:"Licensing", q:"For a first qualifying citation under Utah Code §58-55-503, the director generally may assess a fine of up to:", opts:["$250","$500","$1,000","$10,000"], correct:2, explain:"Utah Code §58-55-503(5)(h)(i) (effective 5/1/2024; superseded 1/1/2027) sets the general citation fine at up to $1,000 for a first offense, up to $2,000 for a second offense, and up to $2,000 for each day of a subsequent continued offense. Certain listed subsections carry higher $2,000 / $4,000 / $4,000-per-day amounts."},
+  {topic:"Licensing", q:"If a person bids construction work that requires a license and is unlicensed, the bid:", opts:["May be awarded if it is the low bid","May not be awarded, and the person may not accept the contract","Becomes valid after a 10-day cure period","Is valid if a license is obtained before final payment"], correct:1, explain:"Utah Code §58-55-501(8) makes bidding without a required license unlawful. §58-55-503(2)(b) (effective 5/1/2024; superseded 1/1/2027) provides that a person who violates §58-55-501(8) may not be awarded and may not accept a contract for the performance of the work."},
+  {topic:"Licensing", q:"When performing construction-trades work, failing to timely provide, upon request, a copy of a current license or the license number is:", opts:["Unprofessional conduct","Required only on company vehicles","Optional if the job is under $7,000","Required only on public projects"], correct:0, explain:"Utah Admin. Code R156-55a-501(9) (current compiled rule effective 8/7/2026) defines as unprofessional conduct failing to timely provide, upon request by any person, a copy of a current license or license number when performing construction trades work. Vehicle license-number display in Utah Code §58-55-501(25) applies to sign installation / nonelectrical outdoor advertising sign contractors, not to all general contractors."},
+  {topic:"Licensing", q:"During each two-year renewal cycle, a contractor licensee generally must complete:", opts:["3 hours of continuing education","12 hours, all of which may be online","24 hours, with no core-hour requirement","6 hours of continuing education, including at least 3 core hours and 3 live in-class hours"], correct:3, explain:"Utah Admin. Code R156-55a-303b (current compiled rule effective 8/7/2026), under Utah Code §58-55-302.5, requires six hours of continuing education during each two-year license term. At least three hours must be core education, and at least three hours must be live in-class attendance; the remaining hours may be professional or core, and may be distance learning. Contractors with a renewal cycle ending after January 1, 2020, must also include at least one hour of energy conservation within those six hours."},
+  {topic:"Licensing", q:"A person who advertises that they will perform a service requiring a contractor license, but does not hold that license:", opts:["Is exempt if the ad is only online","Is exempt if no contract is signed later","Is treated as a contractor, and acting without the required license is unlawful","Commits only a private contract breach, not a licensing violation"], correct:2, explain:"Utah Code §58-55-102 defines 'contractor' to include a person who advertises that the person is a contractor or will perform a service that requires a license under the chapter. Engaging in a construction trade or acting as a contractor without the required license is unlawful conduct under §58-55-501."},
+  {topic:"Licensing", q:"If a contractor loses required insurance coverage, the contractor must:", opts:["Notify the Division; failure to notify is grounds for immediate suspension","Wait until the next renewal to report it","Notify only the surety company","Notify only if a claim is later filed"], correct:0, explain:"Utah Code §58-55-503(4)(b) (effective 5/1/2024; superseded 1/1/2027) includes failure to notify the division concerning loss of insurance coverage, or a change in qualifier, as grounds for immediate suspension of the license. R156-55a-501 also treats failure to continuously maintain required insurance as unprofessional conduct."},
+  {topic:"Labor Laws", q:"An employer required to provide workers' compensation coverage must generally secure it by:", opts:["An authorized insurer or Division-approved self-insurance","A handshake agreement with employees to waive coverage","A general liability policy only","A performance bond"], correct:0, explain:"Utah Code §34A-2-201 requires an employer to secure workers' compensation obligation by insuring with an authorized insurer or by obtaining approval to self-insure. A general liability policy or a performance bond is not a substitute for workers' compensation coverage."},
+  {topic:"Labor Laws", q:"Utah's new-hire reporting law generally requires an employer to report a new or rehired employee within:", opts:["3 days","7 days","20 days","90 days"], correct:2, explain:"Utah Code §35A-7-104 requires an employer to report a new hire or rehire to the state directory of new hires within 20 days of the hire date, or on a Division-approved semimonthly schedule."},
+  {topic:"Labor Laws", q:"The ordinary civil penalty for failing to report a new hire, if the failure is not intentional, is generally:", opts:["$500","$250","$10","$25"], correct:3, explain:"Utah Code §35A-7-106 provides a civil penalty of $25 for a failure to report. The penalty is $500 if the failure is intentional or is the result of a conspiracy or agreement to withhold the report or to supply false or incomplete information."},
+  {topic:"Labor Laws", q:"Utah generally requires regular paydays no farther apart than semimonthly, and wages for a pay period must be paid within:", opts:["24 hours after the period ends","3 days after the period ends","10 days after the close of the pay period","30 days after the close of the pay period"], correct:2, explain:"Utah Code §34-28-3(1) requires an employer to pay wages at regular intervals no longer than semimonthly, and to pay for services rendered during a pay period within 10 days after the close of that pay period. (A yearly-salary employee may be paid monthly by the 7th of the following month.)"},
+  {topic:"Labor Laws", q:"After an employee starts work, the employer must generally complete Section 2 of Form I-9 within:", opts:["1 calendar day","3 business days of the date of hire","7 calendar days","30 days"], correct:1, explain:"Federal Form I-9 rules under 8 CFR 274a.2 (IRCA) require the employee to complete Section 1 by the first day of employment and the employer to complete Section 2 within 3 business days of the hire date. Utah does not set a different I-9 deadline."},
+  {topic:"Risk Management", q:"Which policy typically covers the building and materials against fire, theft, or weather damage during construction?", opts:["Workers' compensation","Builder's risk (course of construction) insurance","A payment bond","Professional liability (errors and omissions) only"], correct:1, explain:"In standard construction-practice and NASCLA-type business-and-law materials, builder's risk (course-of-construction) insurance is property coverage for the work and materials while the project is being built. It is not a substitute for workers' compensation, liability insurance, or payment or performance bonds."},
+  {topic:"Risk Management", q:"A payment bond is primarily intended to protect:", opts:["Subcontractors and suppliers who furnish labor or materials","The contractor's lenders only","The architect's professional liability","The owner's lost profits from a delayed opening"], correct:0, explain:"In standard construction suretyship, a payment bond guarantees that subcontractors and suppliers will be paid if the principal fails to pay them. A performance bond, by contrast, protects the obligee if the contractor fails to complete the contracted work. Utah public projects also use payment-bond remedies under Title 63G, Chapter 6a, Part 11."},
+  {topic:"Risk Management", q:"A bid bond generally protects the owner if the apparent low bidder:", opts:["Finishes the work late","Has a jobsite injury","Omits sales tax from an invoice","Refuses to enter the contract or fails to provide required performance or payment bonds"], correct:3, explain:"In standard surety practice, a bid bond (bid security) compensates the owner if the selected bidder will not honor the bid or cannot furnish the required contract bonds. Late completion, injuries, and tax errors are not what a bid bond is designed to cover."},
+  {topic:"Risk Management", q:"A hold-harmless (indemnity) clause is intended to:", opts:["Replace the need for insurance","Waive all mechanic's lien rights automatically","Transfer specified loss or liability from one party to another","Set the contract retainage percentage"], correct:2, explain:"In standard contract practice, an indemnity or hold-harmless clause allocates risk by requiring one party (the indemnitor) to protect another (the indemnitee) against specified claims or losses. It does not by itself replace insurance, waive lien rights, or set retainage."},
+  {topic:"Risk Management", q:"Completed operations coverage under a CGL policy is intended to cover:", opts:["Only tools stolen from a locked truck","The contractor's income taxes","Bid-shopping disputes","Injury or damage arising from work after it has been finished and put to its intended use"], correct:3, explain:"In standard CGL / NASCLA-type insurance materials, completed-operations coverage addresses bodily injury or property damage that occurs after the work is complete and put to its intended use, as distinguished from premises and operations coverage during the work."},
+  {topic:"Project Management", q:"A schedule of values is used primarily to:", opts:["List unit prices for a cost-plus contract only","Break the contract sum into line items for progress billing","Replace the need for change orders","Set the project retainage cap under Utah law"], correct:1, explain:"In standard construction project-management practice, a schedule of values allocates the contract price among work items so progress payments can be billed and reviewed against completed work. It does not replace change orders or establish Utah's retainage limits."},
+  {topic:"Project Management", q:"A punch list is typically prepared:", opts:["Before the bid is submitted","Only after the warranty period expires","Only by the surety","Near substantial completion, to list remaining incomplete or deficient work"], correct:3, explain:"In standard closeout practice, a punch list identifies incomplete or corrective items at or near substantial completion that must be finished before final completion and final payment."},
+  {topic:"Project Management", q:"Shop drawings are typically prepared by:", opts:["The contractor or a subcontractor or supplier, to show how work will be fabricated or installed","The building official","The surety","The lender's appraiser"], correct:0, explain:"In standard project-documentation practice, shop drawings (along with product data and samples) are submittals prepared by the contractor, a subcontractor, or a supplier to show fabrication or installation details for review. They supplement, but do not replace, the contract documents."},
+  {topic:"Project Management", q:"A time-and-material (or force-account) change is typically used when:", opts:["The original bid included an allowance","The project is already finally complete","The parties cannot reasonably price the change in advance","The contractor wants to avoid a license requirement"], correct:2, explain:"In standard change-order practice, when the scope or cost cannot be fairly priced as a lump sum in advance, the change may be performed on a time-and-material or force-account basis, with documented labor, equipment, and materials. It is not a device to avoid licensing or to reopen a finished contract."},
+  {topic:"Project Management", q:"A bar chart (Gantt) schedule typically shows:", opts:["Only cash-flow projections","Activities plotted against time, but not the logical relationships a CPM network shows","Lien filing deadlines only","Payroll tax deposit dates"], correct:1, explain:"In standard scheduling practice, a bar chart or Gantt chart displays activities against a calendar. A CPM network also shows predecessor and successor logic and is used to identify the critical path and float."},
+  {topic:"Estimating and Bidding", q:"Job costs are $48,000. A 25% markup on cost produces a bid of:", opts:["$54,000","$60,000","$64,000","$72,000"], correct:1, explain:"Markup is a percentage of cost. $48,000 × 1.25 = $60,000. The resulting profit margin is $12,000 / $60,000 = 20%, which is not the same as a 25% margin."},
+  {topic:"Estimating and Bidding", q:"Job costs are $64,000. To earn a 20% profit margin, the bid price should be:", opts:["$70,400","$76,800","$80,000","$84,000"], correct:2, explain:"Margin is profit divided by selling price. Price = cost ÷ (1 − margin) = $64,000 ÷ 0.80 = $80,000. A 20% markup on cost would be only $76,800 and would yield a lower margin ($12,800 / $76,800 ≈ 16.7%)."},
+  {topic:"Estimating and Bidding", q:"A quantity takeoff is primarily:", opts:["A measurement of the labor, material, and equipment quantities needed to build the work","A list of allowance items in the specifications","The contractor's profit percentage","A bid-bond calculation"], correct:0, explain:"In standard estimating practice, a takeoff (quantity survey) measures the quantities of work from the drawings and specifications; those quantities are then priced. It is not itself a profit percentage, allowance schedule, or bid-bond computation."},
+  {topic:"Estimating and Bidding", q:"On a cost-plus contract, the owner generally pays:", opts:["A single lump-sum price regardless of actual cost","Only unit prices for estimated quantities","Only the bid-bond amount","The contractor's actual documented costs plus an agreed fee or percentage"], correct:3, explain:"In standard bid and contract types, a lump-sum (stipulated-sum) contract is a fixed price; a unit-price contract pays actual quantities at agreed unit rates; and a cost-plus contract reimburses the contractor's actual documented costs plus an agreed fee or percentage. Each type allocates cost risk differently."},
+  {topic:"Tax Laws", q:"Federal estimated income-tax payments for a calendar-year sole proprietor are generally due:", opts:["The 15th of January, April, July, and October","April 15, June 15, September 15, and January 15 of the following year","The last day of each calendar quarter","Only on April 15"], correct:1, explain:"IRS estimated-tax rules (Form 1040-ES) use April 15, June 15, September 15, and January 15 of the following year — not equal calendar quarters and not January/April/July/October 15. The January 15 payment can generally be avoided if the return is filed and the balance is paid by January 31."},
+  {topic:"Tax Laws", q:"A business generally must furnish Form 1099-NEC to a payee by:", opts:["January 15","February 28","April 15","January 31"], correct:3, explain:"IRS instructions for Form 1099-NEC generally require the form to be furnished to the recipient and filed with the IRS by January 31. That due date is tighter than some other 1099 types that may have a later IRS filing date."},
+  {topic:"Tax Laws", q:"To avoid an estimated-tax underpayment penalty, a sole proprietor generally must prepay at least:", opts:["90% of the current-year tax, or 100% of the prior-year tax (110% if prior-year AGI exceeded $150,000)","50% of the current-year tax","70% of last year's tax","Only the Social Security portion of self-employment tax"], correct:0, explain:"Under IRC §6654 and IRS Publication 505, the common safe harbors are to prepay at least 90% of the current year's tax, or 100% of the prior year's tax (110% if prior-year adjusted gross income exceeded $150,000). Paying only half, or only the Social Security portion, does not meet the safe harbor."},
 ];
 
 const ALL_TOPICS = Object.keys(LAST_SCORE);
@@ -472,6 +539,16 @@ function renderIntro(){
     </div>`;
   }).join('');
 
+  const latestTotals = reportTotals(LAST_SCORE);
+  const officialHistory = SCORE_REPORTS.map(r => {
+    const t = reportTotals(r.scores);
+    const passed = t.pct >= 70;
+    return `<div class="history-row">
+        <span class="history-meta">${r.date} · Official exam · ${t.correct}/${t.total}</span>
+        <span class="history-score ${passed?'pass':'fail'}">${t.pct}%</span>
+      </div>`;
+  }).join('');
+
   let historyBlock;
   if(attemptHistory.length === 0){
     historyBlock = `<div class="empty-note">No practice attempts logged yet on this device. Finish a set below and it'll show up here.</div>`;
@@ -492,13 +569,18 @@ function renderIntro(){
     <header class="top">
       <div class="eyebrow">Retake Prep — Built From Your Actual Score Report</div>
       <h1>B100 Business &amp; Law<br>Practice Exam</h1>
-      <div class="sub">Your 03/20/2026 attempt scored 48% (needed 70%). Weakest areas: Safety, Business Organization, Contract Management, and Lien Laws.</div>
+      <div class="sub">Your ${LATEST_REPORT.date} attempt scored ${latestTotals.pct}% (${latestTotals.correct}/${latestTotals.total}; needed 70%). Weakest areas: ${formatTopicList(WEAK_TOPICS)}.</div>
       <span class="blueprint-badge">70% TO PASS</span>
       <span class="blueprint-badge weak">${QUESTIONS.filter(q=>isWeak(q.topic)).length} WEAK-AREA QUESTIONS IN BANK</span>
     </header>
     <div class="panel">
-      <div class="eyebrow" style="margin-bottom:12px;">Your last attempt, by subject</div>
+      <div class="eyebrow" style="margin-bottom:12px;">Your ${LATEST_REPORT.date} official exam, by subject</div>
       ${bars}
+    </div>
+    <div class="panel">
+      <div class="eyebrow" style="margin-bottom:10px;">Official Prov exams</div>
+      ${officialHistory}
+      <div class="empty-note" style="margin-top:8px;">Weak-area practice follows your most recent official report. Earlier official attempts stay listed here, separate from practice history on this device.</div>
     </div>
     <div class="panel">
       <div class="eyebrow" style="margin-bottom:10px;">Practice history (this device)</div>
@@ -513,7 +595,7 @@ function renderIntro(){
         <div class="mode-btn ${state.mode==='missed'?'active':''}" onclick="setMode('missed')">Commonly Missed</div>
       </div>
       <div class="sub" style="margin-top:8px;">${
-        state.mode==='weak' ? "Drills only Safety, Business Organization, Contract Management, and Lien Laws — the sections that sank your last score." :
+        state.mode==='weak' ? (WEAK_TOPICS.length ? `Drills only ${formatTopicList(WEAK_TOPICS)} — the sections below 50% on your ${LATEST_REPORT.date} official score report.` : `Your ${LATEST_REPORT.date} official report has no sections below 50%. Choose another mode to keep practicing.`) :
         state.mode==='sim' ? `Matches the real test exactly: ${EXAM_TOTAL_QUESTIONS} questions sized per-topic just like your actual score report (10 Licensing, 6 Contract Mgmt, 4 Business Org, etc.), with a live 120-minute countdown.` :
         state.mode==='missed' ? `Pulls only the ${QUESTIONS.filter(q=>q.commonlyMissed).length} questions matching the clusters test-takers most often get wrong: lien deadline mechanics, margin-vs-markup math, business org liability edge cases, payroll/tax specifics, and contract clause conflicts — spans multiple subject areas by design.` :
         "Covers all 11 subject areas, including the ones you already did well on, to confirm they've stuck."
